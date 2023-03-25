@@ -1,9 +1,20 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
+import Axios from 'axios'
 import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+
+  Axios({
+    method: "GET",
+    url: "http://localhost:8080/",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then(res => {
+    console.log(res.data.message);
+  });
 
   return (
     <div className="App">
