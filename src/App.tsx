@@ -1,18 +1,18 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import Axios from 'axios'
-import './App.css'
+import reactLogo from "./assets/react.svg";
+import { useEffect, useState } from "react";
+import Axios from "axios";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   Axios({
     method: "GET",
     url: "http://localhost:8080/",
     headers: {
-      "Content-Type": "application/json"
-    }
-  }).then(res => {
+      "Content-Type": "application/json",
+    },
+  }).then((res) => {
     console.log(res.data.message);
   });
 
@@ -39,7 +39,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
