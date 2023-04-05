@@ -13,6 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import FilterHdrIcon from "@mui/icons-material/FilterHdr";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import LoginDialog from "../login/LoginDialog";
 import "@fontsource/roboto";
 import "./Navbar.css";
 
@@ -28,7 +29,8 @@ function Navbar() {
   );
 
   const onLoginClick = () => {
-    null;
+    // redirect to login page
+    LoginDialog;
   };
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {

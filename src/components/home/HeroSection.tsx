@@ -3,17 +3,29 @@ import { Button } from "@mui/material";
 import "./HeroSection.css";
 import { Typography } from "@mui/material";
 import "@fontsource/roboto";
+import RegisterDialog from "../login/RegisterDialog";
+import LoginDialog from "../login/LoginDialog";
 import FilterHdrIcon from "@mui/icons-material/FilterHdr";
 
 const HeroSection = () => {
-  const onSignupClick = () => {
-    // redirect to signup page 
-    null;
+  const [open, setOpen] = React.useState(false);
+  const [openLogin, setOpenLogin] = React.useState(false);
+
+
+  const onSignupDialogClick = () => {
+    setOpen(true);
   };
 
-  const onLoginClick = () => {
-    // redirect to login page
-    null;
+  const onSignupDialogClose = () => {
+    setOpen(false);
+  };
+
+  const onLoginDialogClick = () => {
+    setOpenLogin(true);
+  };
+
+  const onLoginDialogClose = () => {
+    setOpenLogin(false);
   };
 
   return (
@@ -54,7 +66,7 @@ const HeroSection = () => {
           variant="contained"
           color="primary"
           size="large"
-          onClick={onSignupClick}
+          onClick={onSignupDialogClick}
           className="buttonStyle"
           id="primaryButton"
         >
@@ -64,12 +76,14 @@ const HeroSection = () => {
           id="loginButton"
           variant="contained"
           color="secondary"
-          onClick={onLoginClick}
+          onClick={onLoginDialogClick}
           className="buttonStyle"
         >
           Login
         </Button>
       </div>
+      <RegisterDialog open={open} handleLoginOpen={onLoginDialogClick} handleClose={onSignupDialogClose} />
+      <LoginDialog open={openLogin} handleRegisterOpen={onSignupDialogClick} handleClose={onLoginDialogClose} handleRegisterClose={onSignupDialogClose}/>
     </section>
   );
 };
