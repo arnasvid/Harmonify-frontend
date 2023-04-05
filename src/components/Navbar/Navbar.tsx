@@ -14,6 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FilterHdrIcon from "@mui/icons-material/FilterHdr";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LoginDialog from "../login/LoginDialog";
+import RegisterDialog from "../login/RegisterDialog";
 import "@fontsource/roboto";
 import "./Navbar.css";
 
@@ -21,17 +22,15 @@ const pages = ["Home", "News", "Top 50", "About US"];
 // const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Navbar() {
+  const [open, setOpen] = React.useState(false);
+  const [openLogin, setOpenLogin] = React.useState(false);
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
-
-  const onLoginClick = () => {
-    // redirect to login page
-    LoginDialog;
-  };
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -46,6 +45,22 @@ function Navbar() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const onLoginDialogClick = () => {
+    setOpenLogin(true);
+  };
+
+  const onLoginDialogClose = () => {
+    setOpenLogin(false);
+  };
+
+  const onSignupDialogClick = () => {
+    setOpen(true);
+  };
+
+  const onSignupDialogClose = () => {
+    setOpen(false);
   };
 
   return (
@@ -156,7 +171,7 @@ function Navbar() {
               id="loginButton"
               variant="contained"
               color="secondary"
-              onClick={onLoginClick}
+              onClick={onLoginDialogClick}
               className="buttonStyle"
             >
               <AccountCircleIcon sx={{ mr: 1 }} />
@@ -199,6 +214,7 @@ function Navbar() {
           </Box>
         </Toolbar>
       </Container>
+<LoginDialog open={openLogin} handleRegisterOpen={onSignupDialogClick} handleClose={onLoginDialogClose} handleRegisterClose={onSignupDialogClose}/>
     </AppBar>
   );
 }
