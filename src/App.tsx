@@ -5,6 +5,7 @@ import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import HeroSection from "./components/home/HeroSection";
 
+
 function App() {
   Axios({
     method: "GET",
@@ -18,7 +19,6 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
       <HeroSection />
     </div>
   );

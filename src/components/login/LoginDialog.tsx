@@ -28,7 +28,7 @@ const LoginDialog = (props: LoginDialogProps) => {
 	};
 	const wrapperRef = useRef<HTMLDivElement>(null);
 	return (
-		<Dialog fullWidth open={props.open} onClose={() => {}}>
+		<Dialog fullWidth open={props.open} onClose={props.handleClose}>
 			<div ref={wrapperRef} className={"login-main-component"}>
 				<div
 					className={"login-header-buttons"}
@@ -36,7 +36,12 @@ const LoginDialog = (props: LoginDialogProps) => {
 						backgroundColor: "#F5F5F5",
 					}}
 				>
-					<Button className="button" onClick={props.handleClose}>
+					<Button className="button" onClick={props.handleClose}
+					style={{ 
+						textTransform: "none",
+						color: "#000000",
+					 }}
+					>
 						<ArrowBackIosNew
 							style={{
 								height: "16px",
@@ -44,7 +49,7 @@ const LoginDialog = (props: LoginDialogProps) => {
 								marginRight: "4px",
 							}}
 						/>
-						<Typography variant="h5" className="login-header-return-button">
+						<Typography variant="h6" className="login-header-return-button">
 							Back
 						</Typography>
 					</Button>

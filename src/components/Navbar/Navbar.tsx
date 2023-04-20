@@ -1,51 +1,31 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
+import { Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import FilterHdrIcon from "@mui/icons-material/FilterHdr";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import NewspaperIcon from "@mui/icons-material/Newspaper";
+import ListAltIcon from "@mui/icons-material/ListAlt";
+import ContactsIcon from "@mui/icons-material/Contacts";
+import HomeIcon from "@mui/icons-material/Home";
+import { Container } from "@mui/system";
+import CustomButton from "../common/CustomButton";
+import logo from "../../assets/logoNavbar.png";
 import LoginDialog from "../login/LoginDialog";
 import RegisterDialog from "../login/RegisterDialog";
-import "@fontsource/roboto";
-import "./Navbar.css";
+import {
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  styled,
+} from "@mui/material";
 
-const pages = ["Home", "News", "Top 50", "About US"];
-// const settings = ["Profile", "Account", "Dashboard", "Logout"];
+import { useState } from "react";
 
-function Navbar() {
+export const Navbar = () => {
   const [open, setOpen] = React.useState(false);
   const [openLogin, setOpenLogin] = React.useState(false);
-
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  );
-
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
 
   const onLoginDialogClick = () => {
     setOpenLogin(true);
@@ -63,159 +43,156 @@ function Navbar() {
     setOpen(false);
   };
 
-  return (
-    <AppBar
-      className=""
-      position="static"
-      sx={{
-        backgroundColor: "transparent",
-        borderStyle: "none",
-      }}
+  const [mobileMenu, setMobileMenu] = useState({
+    left: false,
+  });
+
+  const toggleDrawer = (anchor: string, open: boolean) => (event: any) => {
+    if (
+      event.type === "keydown" &&
+      (event.type === "Tab" || event.type === "Shift")
+    ) {
+      return;
+    }
+
+    setMobileMenu({ ...mobileMenu, [anchor]: open });
+  };
+
+  const list = (anchor: string) => (
+    <Box
+      sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
     >
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <FilterHdrIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="./"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            Harmonify
-          </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-          {/* mobile */}
-          <Box className="mobile-logo">
-            <FilterHdrIcon
-              sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
-            />
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href=""
-              sx={{
-                mr: 2,
-                display: { xs: "flex", md: "none" },
-                flexGrow: 1,
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              Harmonify
-            </Typography>
-          </Box>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box>
-
-          <Box sx={{ flexGrow: 0, display: { md: "flex" }}}>
-            <Button
-              id="loginButton"
-              variant="contained"
-              color="secondary"
-              onClick={onLoginDialogClick}
-              className="buttonStyle"
-            >
-              <AccountCircleIcon sx={{ mr: 1 }} />
-              <Typography sx={{ flexGrow: 0 , display: { xs: "none", md: "flex" } }}>
-                Login
-              </Typography>
-            </Button>
-            {/* <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar/>
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px"}}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem
-                  key={setting}
-                  onClick={handleCloseUserMenu}
-                >
-                  <Typography textAlign="center" color="#000000">
-                    {setting}
-                  </Typography>
-                </MenuItem>
-              ))} */}
-            {/* </Menu> */}
-          </Box>
-        </Toolbar>
-      </Container>
-<LoginDialog open={openLogin} handleRegisterOpen={onSignupDialogClick} handleClose={onLoginDialogClose} handleRegisterClose={onSignupDialogClose}/>
-    </AppBar>
+      <List>
+        {["Home", "News", "Top 50", "About Us"].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                {index === 0 && <HomeIcon />}
+                {index === 1 && <NewspaperIcon />}
+                {index === 2 && <ListAltIcon />}
+                {index === 3 && <ContactsIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
   );
-}
+
+  const NavLink = styled(Typography)(({ theme }) => ({
+    fontSize: "14px",
+    color: "#4F5361",
+    fontWeight: "bold",
+    cursor: "pointer",
+    "&:hover": {
+      color: "#fff",
+    },
+  }));
+
+  const NavbarLinksBox = styled(Box)(({ theme }) => ({
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: theme.spacing(3),
+    [theme.breakpoints.down("md")]: {
+      display: "none",
+    },
+  }));
+
+  const CustomMenuIcon = styled(MenuIcon)(({ theme }) => ({
+    cursor: "pointer",
+    display: "none",
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.down("md")]: {
+      display: "block",
+    },
+  }));
+
+  const NavbarContainer = styled(Container)(({ theme }) => ({
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: theme.spacing(5),
+    [theme.breakpoints.down("md")]: {
+      padding: theme.spacing(2),
+    },
+  }));
+
+  const NavbarLogo = styled("img")(({ theme }) => ({
+    cursor: "pointer",
+    [theme.breakpoints.down("md")]: {
+      display: "none",
+    },
+  }));
+
+  return (
+    <NavbarContainer>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "2.5rem",
+        }}
+      >
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <CustomMenuIcon onClick={toggleDrawer("left", true)} />
+          <Drawer
+            anchor="left"
+            open={mobileMenu["left"]}
+            onClose={toggleDrawer("left", false)}
+          >
+            {list("left")}
+          </Drawer>
+          <NavbarLogo
+            src={logo}
+            alt="logo"
+            style={{ maxWidth: "100" }}
+          />
+        </Box>
+        <NavbarLinksBox>
+          <NavLink variant="body2">Home</NavLink>
+          <NavLink variant="body2">News</NavLink>
+          <NavLink variant="body2">Top 50</NavLink>
+          <NavLink variant="body2">About Us</NavLink>
+        </NavbarLinksBox>
+      </Box>
+
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "1rem",
+        }}
+      >
+        <NavLink variant="body2" onClick={onLoginDialogClick}>
+          Log in
+        </NavLink>
+        <CustomButton
+          backgroundColor="#0F184C"
+          buttonColor="#fff"
+          buttonText="Register"
+          onClick={onSignupDialogClick}
+        />
+      </Box>
+      <RegisterDialog
+        open={open}
+        handleLoginOpen={onLoginDialogClick}
+        handleClose={onSignupDialogClose}
+      />
+      <LoginDialog
+        open={openLogin}
+        handleRegisterOpen={onSignupDialogClick}
+        handleClose={onLoginDialogClose}
+        handleRegisterClose={onSignupDialogClose}
+      />
+    </NavbarContainer>
+  );
+};
+
 export default Navbar;
