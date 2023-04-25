@@ -6,6 +6,7 @@ import CustomButton from "../common/CustomButton";
 import heroIcon from "../../assets/heroIcon.png";
 import RegisterDialog from "../login/RegisterDialog";
 import LoginDialog from "../login/LoginDialog";
+import untitled from "../../assets/untitled.png";
 
 const HeroSection = () => {
   const [open, setOpen] = React.useState(false);
