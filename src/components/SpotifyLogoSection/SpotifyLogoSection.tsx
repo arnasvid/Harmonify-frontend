@@ -8,6 +8,7 @@ const SpotifyLogoSection = () => {
   const CustomContainer = styled(Container)(({ theme }) => ({
     backgroundColor: "#ffffff",
     height: "208px",
+    minHeight: "150px",
     minWidth: "100vw",
     // borderRadius: "15px",
     display: "flex",
@@ -17,7 +18,7 @@ const SpotifyLogoSection = () => {
       height: "auto",
       flexDirection: "column",
       alignItems: "center",
-      padding: theme.spacing(3, 3, 0, 3),
+      padding: theme.spacing(0, 3, 0, 3),
       width: "90%",
     },
   }));
@@ -56,7 +57,9 @@ const SpotifyLogoSection = () => {
           <Typography
             sx={{
               fontSize: { xs: "16px", md: "23px" },
-              color: "#5A6473",
+              // color: "#5A6473",
+              color: "#000336",
+              opacity: "0.8",
               fontWeight: "700",
               flexWrap: "wrap",
               flex: "0.5",
@@ -64,7 +67,7 @@ const SpotifyLogoSection = () => {
               textAlign: { xs: "center", md: "left" },
             }}
           >
-            Connect your Spotify account and get your music analysis everyday!
+            Connect your Spotify account and get your music statistics everyday!
           </Typography>
           <CustomImage
             src={SpotifyLogo}
