@@ -4,9 +4,13 @@ import Axios from "axios";
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import HeroSection from "./components/home/HeroSection";
+import common from "./redux/common";
+import { useAppSelector } from "./redux/store/hooks";
 
 
 function App() {
+  const isLoggedIn = useAppSelector((state) => state.common.isUserLoggedIn);
+
   Axios({
     method: "GET",
     url: "http://localhost:8080/",
@@ -16,6 +20,15 @@ function App() {
   }).then((res) => {
     console.log(res.data.message);
   });
+
+  useEffect(() => {
+    common.getStatus();
+  }, []);
+
+  // useEffect(() => {
+  //   console.log(isLoggedIn);
+  //   common.getStatus();
+  // }, [isLoggedIn]);
 
   return (
     <div className="App">

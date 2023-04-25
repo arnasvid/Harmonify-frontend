@@ -6,10 +6,10 @@ import FormTextField from "../form/FormTextField";
 import ReadableHiddenPasswordField from "../form/ReadableHiddenPasswordField";
 import { Form, Formik, FormikProps } from "formik";
 import * as yup from "yup";
+import AuthAPI from "../../api/AuthApi";
 
 interface LoginDialogProps {
 	open: boolean;
-	isDoctorLogin?: boolean;
 	handleClose: () => void;
 	handleRegisterOpen: () => void;
 	handleRegisterClose: () => void;
@@ -18,13 +18,14 @@ interface LoginDialogProps {
 const LoginDialog = (props: LoginDialogProps) => {
 	const handleSubmit = async (values: LoginValues) => {
 		// const navigate = useNavigate();
-		console.log("values", values);
-		// let response = await AuthAPI.register(values);
+		let response = await AuthAPI.login(values.email, values.password);
 		props.handleClose();
 		// Navigate("/home");
 		window.location.href=("/home");
 
-		// console.log("AuthPAI response", response);
+		// for testing reasons
+		console.log("AuthAPI response", response);
+		console.log("Status", AuthAPI.getStatus());
 	};
 	const wrapperRef = useRef<HTMLDivElement>(null);
 	return (

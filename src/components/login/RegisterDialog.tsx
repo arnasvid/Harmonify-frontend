@@ -7,6 +7,8 @@ import { Form, Formik, FormikProps } from "formik";
 import { useNavigate } from "react-router";
 import * as yup from "yup";
 import "./Login.css";
+import AuthAPI from "../../api/AuthApi";
+import { Navigate } from "react-router-dom";
 
 interface RegisterDialogProps {
 	open: boolean;
@@ -18,12 +20,12 @@ const RegisterDialog = (props: RegisterDialogProps) => {
 	const handleSubmit = async (values: RegistrationValues) => {
 		// const navigate = useNavigate();
 		console.log("values", values);
-		// let response = await AuthAPI.register(values);
+		let response = await AuthAPI.register(values.username, values.email, values.password);
 		props.handleClose();
-		// Navigate("/home");
+		// navigate("/home");
 		window.location.href=("/home");
 
-		// console.log("AuthPAI response", response);
+		console.log("AuthPAI response", response);
 	};
 	return (
 		<Dialog

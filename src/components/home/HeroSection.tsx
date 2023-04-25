@@ -1,6 +1,6 @@
 import { Box, Button, styled, Typography } from "@mui/material";
 import { Container } from "@mui/system";
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
 import CustomButton from "../common/CustomButton";
 import heroIcon from "../../assets/heroIcon.png";
@@ -8,24 +8,24 @@ import RegisterDialog from "../login/RegisterDialog";
 import LoginDialog from "../login/LoginDialog";
 
 const HeroSection = () => {
-    const [open, setOpen] = React.useState(false);
-    const [openLogin, setOpenLogin] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [openLogin, setOpenLogin] = React.useState(false);
 
-    const onLoginDialogClick = () => {
-      setOpenLogin(true);
-    };
-  
-    const onLoginDialogClose = () => {
-      setOpenLogin(false);
-    };
+  const onLoginDialogClick = () => {
+    setOpenLogin(true);
+  };
 
-    const onSignupDialogClick = () => {
-        setOpen(true);
-    };
-    
-    const onSignupDialogClose = () => {
-        setOpen(false);
-    };
+  const onLoginDialogClose = () => {
+    setOpenLogin(false);
+  };
+
+  const onSignupDialogClick = () => {
+    setOpen(true);
+  };
+
+  const onSignupDialogClose = () => {
+    setOpen(false);
+  };
 
   const CustomBox = styled(Box)(({ theme }) => ({
     display: "flex",
