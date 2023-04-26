@@ -6,8 +6,9 @@ import Navbar from "./components/Navbar/Navbar";
 import HeroSection from "./components/home/HeroSection";
 import common from "./redux/common";
 import { useAppSelector } from "./redux/store/hooks";
-// import FeatureSection from "./components/features/FeatureSection";
+import FeatureSection from "./components/features/FeatureSection";
 import SpotifyLogoSection from "./components/SpotifyLogoSection/SpotifyLogoSection";
+import Footer from "./components/footer/Footer";
 
 
 
@@ -37,7 +38,8 @@ function App() {
     <div className="App">
       <HeroSection />
       <SpotifyLogoSection/>
-      {/* <FeatureSection /> */}
+      <FeatureSection />
+      <Footer/>
     </div>
   );
 }

@@ -1,10 +1,11 @@
 import { styled, Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import React from "react";
+import fbIcon from "../../assets/fbicon.png";
+import twitterIcon from "../../assets/twittericon.png";
+import linkedinIcon from "../../assets/linkedinicon.png";
 
-// import fbIcon from "../media/fbicon.png";
-// import twitterIcon from "../media/twittericon.png";
-// import linkedinIcon from "../media/linkedinicon.png";
+
 
 const Footer = () => {
   const CustomContainer = styled(Container)(({ theme }) => ({
@@ -49,16 +50,16 @@ const Footer = () => {
                 mb: 2,
               }}
             >
-              Products
+              Harmonify
             </Typography>
 
-            <FooterLink>Listing</FooterLink>
+            <FooterLink>Home</FooterLink>
             <br />
-            <FooterLink>Properties</FooterLink>
+            <FooterLink>News</FooterLink>
             <br />
-            <FooterLink>Agents</FooterLink>
+            <FooterLink>Top 50</FooterLink>
             <br />
-            <FooterLink>Blog</FooterLink>
+            <FooterLink>About Us</FooterLink>
           </Box>
 
           <Box>
@@ -70,16 +71,16 @@ const Footer = () => {
                 mb: 2,
               }}
             >
-              Resources
+              Socials
             </Typography>
 
-            <FooterLink>Our Homes</FooterLink>
+            <FooterLink>Discord</FooterLink>
             <br />
-            <FooterLink>Stories</FooterLink>
+            <FooterLink>Twitter</FooterLink>
             <br />
-            <FooterLink>Video</FooterLink>
+            <FooterLink>Instagram</FooterLink>
             <br />
-            <FooterLink>Free Trial</FooterLink>
+            <FooterLink>GitHub</FooterLink>
           </Box>
 
           <Box>
@@ -100,7 +101,7 @@ const Footer = () => {
             <br />
             <FooterLink>Privacy</FooterLink>
             <br />
-            <FooterLink>Sitemap</FooterLink>
+            <FooterLink>Support</FooterLink>
           </Box>
 
           <Box>
@@ -123,10 +124,10 @@ const Footer = () => {
                 mb: 2,
               }}
             >
-              You’ll find your next home, in any style you prefer.
+              Feel free to get in touch with us any time!
             </Typography>
 
-            {/* <IconBox>
+            <IconBox>
               <img src={fbIcon} alt="fbIcon" style={{ cursor: "pointer" }} />
               <img
                 src={twitterIcon}
@@ -138,7 +139,7 @@ const Footer = () => {
                 alt="linkedinIcon"
                 style={{ cursor: "pointer" }}
               />
-            </IconBox> */}
+            </IconBox>
           </Box>
         </CustomContainer>
       </CustomContainer>

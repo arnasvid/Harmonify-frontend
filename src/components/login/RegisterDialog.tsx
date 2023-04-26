@@ -25,7 +25,7 @@ const RegisterDialog = (props: RegisterDialogProps) => {
 		// navigate("/home");
 		window.location.href=("/home");
 
-		console.log("AuthPAI response", response);
+		console.log("AuthAPI response", response);
 	};
 	return (
 		<Dialog
@@ -55,6 +55,10 @@ const RegisterDialog = (props: RegisterDialogProps) => {
 				>
 					<Button
 						className="button"
+						style={{ 
+							textTransform: "none",
+							color: "#000000",
+						 }}
 						onClick={() => {
 							// props.handleLoginOpen();
 							props.handleClose();
@@ -67,7 +71,7 @@ const RegisterDialog = (props: RegisterDialogProps) => {
 								marginRight: "4px",
 							}}
 						/>
-						<Typography variant="h5" className="login-header-return-button">
+						<Typography variant="h6" className="login-header-return-button">
 							Back
 						</Typography>
 					</Button>
