@@ -22,8 +22,11 @@ import {
 } from "@mui/material";
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Navbar = () => {
+  const navigate = useNavigate();
+
   const [open, setOpen] = React.useState(false);
   const [openLogin, setOpenLogin] = React.useState(false);
 
@@ -58,30 +61,48 @@ export const Navbar = () => {
     setMobileMenu({ ...mobileMenu, [anchor]: open });
   };
 
-  const list = (anchor: string) => (
-    <Box
-      sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-      <List>
-        {["Home", "News", "Top 50", "About Us"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index === 0 && <HomeIcon />}
-                {index === 1 && <NewspaperIcon />}
-                {index === 2 && <ListAltIcon />}
-                {index === 3 && <ContactsIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
+  const list = (anchor: string) => {
+    const urlDictionary = {
+      "Home": "/",
+      "New Releases": "/new-releases",
+      "Top 50": "/top-50",
+      "Songs We Listen": "/songs-we-listen",
+    };
+    
+    const handleListItemClick = (text: string) => {
+      if (text in urlDictionary) {
+        const url = urlDictionary[text as keyof typeof urlDictionary];
+        window.location.href = url;
+      }
+    };
+
+    return (
+      <Box
+        sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
+        role="presentation"
+        onClick={toggleDrawer(anchor, false)}
+        onKeyDown={toggleDrawer(anchor, false)}
+      >
+        <List>
+          {["Home", "New Releases", "Top 50", "Songs We Listen"].map(
+            (text, index) => (
+              <ListItem key={text} disablePadding>
+                <ListItemButton onClick={() => handleListItemClick(text)}>
+                  <ListItemIcon>
+                    {index === 0 && <HomeIcon />}
+                    {index === 1 && <NewspaperIcon />}
+                    {index === 2 && <ListAltIcon />}
+                    {index === 3 && <ContactsIcon />}
+                  </ListItemIcon>
+                  <ListItemText primary={text} />
+                </ListItemButton>
+              </ListItem>
+            )
+          )}
+        </List>
+      </Box>
+    );
+  };
 
   const NavLink = styled(Typography)(({ theme }) => ({
     fontSize: "14px",
@@ -148,17 +169,43 @@ export const Navbar = () => {
           >
             {list("left")}
           </Drawer>
-          <NavbarLogo
-            src={logo}
-            alt="logo"
-            style={{ maxWidth: "100" }}
-          />
+          <NavbarLogo src={logo} alt="logo" style={{ maxWidth: "100" }} onClick={() => {
+            navigate("/");
+          }} />
         </Box>
         <NavbarLinksBox>
-          <NavLink variant="body2">Home</NavLink>
-          <NavLink variant="body2">News</NavLink>
-          <NavLink variant="body2">Top 50</NavLink>
-          <NavLink variant="body2">About Us</NavLink>
+          <NavLink
+            variant="body2"
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            Home
+          </NavLink>
+          <NavLink
+            variant="body2"
+            onClick={() => {
+              navigate("/new-releases");
+            }}
+          >
+            New Releases
+          </NavLink>
+          <NavLink
+            variant="body2"
+            onClick={() => {
+              navigate("/top-50");
+            }}
+          >
+            Top 50
+          </NavLink>
+          <NavLink
+            variant="body2"
+            onClick={() => {
+              navigate("/songs-we-listen");
+            }}
+          >
+            Songs We Listen
+          </NavLink>
         </NavbarLinksBox>
       </Box>
 

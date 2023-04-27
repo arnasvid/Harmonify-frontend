@@ -1,16 +1,11 @@
-import reactLogo from "./assets/react.svg";
 import { useEffect, useState } from "react";
 import Axios from "axios";
 import "./App.css";
-import Navbar from "./components/Navbar/Navbar";
-import HeroSection from "./components/home/HeroSection";
 import common from "./redux/common";
 import { useAppSelector } from "./redux/store/hooks";
-import FeatureSection from "./components/features/FeatureSection";
-import SpotifyLogoSection from "./components/SpotifyLogoSection/SpotifyLogoSection";
-import Footer from "./components/footer/Footer";
-
-
+import { BrowserRouter as Router, Route, Routes, RouteObject } from "react-router-dom";
+import routes from "./routes";
+import RouteItem from "./models/routes/RouteItem";
 
 function App() {
   const isLoggedIn = useAppSelector((state) => state.common.isUserLoggedIn);
@@ -26,10 +21,11 @@ function App() {
 
   return (
     <div className="App">
-      <HeroSection />
-      <SpotifyLogoSection/>
-      <FeatureSection />
-      <Footer/>
+      <Routes>
+      {routes.map((route : RouteItem) => (
+        <Route path={route.path} key={route.key} element={route.element} />
+      ))}
+      </Routes>
     </div>
   );
 }
