@@ -15,16 +15,6 @@ import Footer from "./components/footer/Footer";
 function App() {
   const isLoggedIn = useAppSelector((state) => state.common.isUserLoggedIn);
 
-  Axios({
-    method: "GET",
-    url: "http://localhost:8080/",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  }).then((res) => {
-    console.log(res.data.message);
-  });
-
   useEffect(() => {
     common.getStatus();
   }, []);

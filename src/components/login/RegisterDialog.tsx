@@ -26,6 +26,7 @@ const RegisterDialog = (props: RegisterDialogProps) => {
 		window.location.href=("/home");
 
 		console.log("AuthAPI response", response);
+		console.log("Status", AuthAPI.getStatus());
 	};
 	return (
 		<Dialog

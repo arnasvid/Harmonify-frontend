@@ -21,7 +21,7 @@ const LoginDialog = (props: LoginDialogProps) => {
 		let response = await AuthAPI.login(values.email, values.password);
 		props.handleClose();
 		// Navigate("/home");
-		window.location.href=("/home");
+		// window.location.href=("/home");
 
 		// for testing reasons
 		console.log("AuthAPI response", response);
