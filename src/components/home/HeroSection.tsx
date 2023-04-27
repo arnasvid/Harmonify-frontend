@@ -69,7 +69,7 @@ const HeroSection = () => {
               Welcome to Harmonify
             </Typography>
             <Title variant="h1">
-              The best way to find your next favorite song.
+              The best way to find your next favorite song
             </Title>
             <Typography
               variant="body2"
