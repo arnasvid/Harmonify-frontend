@@ -29,12 +29,12 @@ const RegisterDialog = (props: RegisterDialogProps) => {
 	};
 	return (
 		<Dialog
+			fullWidth
 			open={props.open}
 			onClose={props.handleClose}
 			PaperProps={{
 				style: {
 					boxSizing: "border-box",
-					minWidth: "600px",
 					boxShadow: "none",
 				},
 			}}
