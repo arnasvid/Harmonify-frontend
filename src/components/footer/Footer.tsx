@@ -4,10 +4,11 @@ import React from "react";
 import fbIcon from "../../assets/fbicon.png";
 import twitterIcon from "../../assets/twittericon.png";
 import linkedinIcon from "../../assets/linkedinicon.png";
-
+import { useNavigate } from "react-router-dom";
 
 
 const Footer = () => {
+  const navigate = useNavigate();
   const CustomContainer = styled(Container)(({ theme }) => ({
     display: "flex",
     justifyContent: "space-around",
@@ -31,7 +32,7 @@ const Footer = () => {
     fontSize: "16px",
     color: "#7A7A7E",
     fontWeight: "300",
-    cursor: "pointer",
+    cursor: "default",
     "&:hover": {
       color: "#000",
     },
@@ -55,7 +56,7 @@ const Footer = () => {
 
             <FooterLink>Home</FooterLink>
             <br />
-            <FooterLink>News</FooterLink>
+            <FooterLink>New Releases</FooterLink>
             <br />
             <FooterLink>Top 50</FooterLink>
             <br />

@@ -72,7 +72,7 @@ export const Navbar = () => {
     const handleListItemClick = (text: string) => {
       if (text in urlDictionary) {
         const url = urlDictionary[text as keyof typeof urlDictionary];
-        window.location.href = url;
+        navigate(url);
       }
     };
 
