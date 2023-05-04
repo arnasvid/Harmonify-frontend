@@ -1,7 +1,7 @@
 import { Button, styled, Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import React from "react";
-import SpotifyLogo from "../../assets/spotifyLogo.png";
+import SpotifyLogo from "../../assets/SpotifyLogo.png";
 import CustomButton from "../common/CustomButton";
 
 const SpotifyLogoSection = () => {
