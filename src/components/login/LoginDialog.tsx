@@ -7,6 +7,7 @@ import ReadableHiddenPasswordField from "../form/ReadableHiddenPasswordField";
 import { Form, Formik, FormikProps } from "formik";
 import * as yup from "yup";
 import AuthAPI from "../../api/AuthApi";
+import { useNavigate } from "react-router-dom";
 
 interface LoginDialogProps {
 	open: boolean;
@@ -16,13 +17,11 @@ interface LoginDialogProps {
 }
 
 const LoginDialog = (props: LoginDialogProps) => {
+	const navigate = useNavigate();
 	const handleSubmit = async (values: LoginValues) => {
-		// const navigate = useNavigate();
 		let response = await AuthAPI.login(values.email, values.password);
 		props.handleClose();
-		// Navigate("/home");
-		// window.location.href=("/home");
-
+		// navigate("/")
 		// for testing reasons
 		console.log("AuthAPI response", response);
 		console.log("Status", AuthAPI.getStatus());

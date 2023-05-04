@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Button, styled, Typography } from "@mui/material";
 import { Container } from "@mui/system";
-import SpotifyLogo from "../../assets/spotifyLogo.png";
+import SpotifyLogo from "../../assets/SpotifyLogo.png";
 import StatisticsIcon from "../../assets/statistics.png";
 
 const CustomImage = styled("img")(({ theme }) => ({
