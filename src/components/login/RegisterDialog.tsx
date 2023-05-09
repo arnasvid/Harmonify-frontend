@@ -13,18 +13,18 @@ import { Navigate } from "react-router-dom";
 interface RegisterDialogProps {
 	open: boolean;
 	handleLoginOpen: () => void;
+	handleLoginClose: () => void;
 	handleClose: () => void;
 }
 
 const RegisterDialog = (props: RegisterDialogProps) => {
+	const navigate = useNavigate();
 	const handleSubmit = async (values: RegistrationValues) => {
-		// const navigate = useNavigate();
 		console.log("values", values);
 		let response = await AuthAPI.register(values.username, values.email, values.password);
 		props.handleClose();
-		// navigate("/home");
-		window.location.href=("/home");
-
+		navigate("/logged-in-landing-page");
+		
 		console.log("AuthAPI response", response);
 		console.log("Status", AuthAPI.getStatus());
 	};

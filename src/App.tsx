@@ -8,7 +8,7 @@ import routes from "./routes";
 import RouteItem from "./models/routes/RouteItem";
 
 function App() {
-  const isLoggedIn = useAppSelector((state) => state.common.isUserLoggedIn);
+  // const isLoggedIn = useAppSelector((state) => state.common.isUserLoggedIn);
 
   useEffect(() => {
     common.getStatus();
