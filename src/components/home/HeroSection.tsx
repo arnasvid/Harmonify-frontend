@@ -104,6 +104,7 @@ const HeroSection = () => {
         open={open}
         handleLoginOpen={onLoginDialogClick}
         handleClose={onSignupDialogClose}
+        handleLoginClose={onLoginDialogClose}
       />
     </Box>
   );

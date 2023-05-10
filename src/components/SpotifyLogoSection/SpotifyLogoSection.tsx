@@ -9,7 +9,7 @@ const SpotifyLogoSection = () => {
     backgroundColor: "#ffffff",
     height: "208px",
     minHeight: "150px",
-    minWidth: "100vw",
+    minWidth: "100%",
     // borderRadius: "15px",
     display: "flex",
     justifyContent: "space-around",

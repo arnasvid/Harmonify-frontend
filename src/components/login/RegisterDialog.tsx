@@ -51,7 +51,7 @@ const RegisterDialog = (props: RegisterDialogProps) => {
 					className={"login-header-buttons"}
 					style={{
 						backgroundColor: "#F5F5F5",
-						width: "100%",
+						width: "97%",
 					}}
 				>
 					<Button

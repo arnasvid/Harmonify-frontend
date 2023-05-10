@@ -231,6 +231,7 @@ export const Navbar = () => {
         open={open}
         handleLoginOpen={onLoginDialogClick}
         handleClose={onSignupDialogClose}
+        handleLoginClose={onLoginDialogClose}
       />
       <LoginDialog
         open={openLogin}
