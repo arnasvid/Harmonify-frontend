@@ -4,7 +4,7 @@ import "./App.css";
 import common from "./redux/common";
 import { useAppSelector } from "./redux/store/hooks";
 import { BrowserRouter as Router, Route, Routes, RouteObject } from "react-router-dom";
-import routes from "./routes";
+import routes from "./routes/routes";
 import RouteItem from "./models/routes/RouteItem";
 
 function App() {

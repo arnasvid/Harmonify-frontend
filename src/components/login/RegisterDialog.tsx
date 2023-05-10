@@ -23,7 +23,8 @@ const RegisterDialog = (props: RegisterDialogProps) => {
 		console.log("values", values);
 		let response = await AuthAPI.register(values.username, values.email, values.password);
 		props.handleClose();
-		navigate("/logged-in-landing-page");
+		navigate("/");
+		window.location.reload();
 		
 		console.log("AuthAPI response", response);
 		console.log("Status", AuthAPI.getStatus());

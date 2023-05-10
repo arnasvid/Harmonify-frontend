@@ -10,6 +10,8 @@ const HeroSection = () => {
   const [open, setOpen] = React.useState(false);
   const [openLogin, setOpenLogin] = React.useState(false);
 
+  const isUserLoggedIn = localStorage.getItem("token");
+
   const onLoginDialogClick = () => {
     setOpenLogin(true);
   };
@@ -52,53 +54,100 @@ const HeroSection = () => {
     <Box sx={{ minHeight: "80vh", width: "100%" }}>
       <Container>
         <Navbar />
-        <CustomBox>
-          <Box sx={{ flex: "1" }}>
-            <Typography
-              variant="body2"
-              sx={{
-                fontSize: "18px",
-                color: "#687690",
-                fontWeight: "500",
-                mt: 10,
-                mb: 4,
+        {isUserLoggedIn ? (
+          <CustomBox>
+            <Box sx={{ flex: "1" }}>
+              <Typography
+                variant="body2"
+                sx={{
+                  fontSize: "18px",
+                  color: "#687690",
+                  fontWeight: "500",
+                  mt: 10,
+                  mb: 4,
+                }}
+              >
+                Welcome to Harmonify
+              </Typography>
+              <Title variant="h1">Hello, music lover!</Title>
+              <Typography
+                variant="body2"
+                sx={{ fontSize: "18px", color: "#5A6473", my: 4 }}
+              >
+                Check out your music taste after connecting your Spotify
+                account.
+              </Typography>
+              <CustomButton
+                backgroundColor="green"
+                buttonColor="#fff"
+                buttonText="Connect Spotify"
+                heroBtn={true}
+              />
+            </Box>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flex: "1.25",
               }}
             >
-              Welcome to Harmonify
-            </Typography>
-            <Title variant="h1">
-              The best way to find your next favorite song
-            </Title>
-            <Typography
-              variant="body2"
-              sx={{ fontSize: "18px", color: "#5A6473", my: 4 }}
+              <img
+                src={heroIcon}
+                alt="hero"
+                style={{ maxWidth: "80%", marginBottom: "2rem" }}
+              />
+            </div>
+          </CustomBox>
+        ) : (
+          <CustomBox>
+            <Box sx={{ flex: "1" }}>
+              <Typography
+                variant="body2"
+                sx={{
+                  fontSize: "18px",
+                  color: "#687690",
+                  fontWeight: "500",
+                  mt: 10,
+                  mb: 4,
+                }}
+              >
+                Welcome to Harmonify
+              </Typography>
+              <Title variant="h1">
+                The best way to find your next favorite song
+              </Title>
+              <Typography
+                variant="body2"
+                sx={{ fontSize: "18px", color: "#5A6473", my: 4 }}
+              >
+                Harmonify is a music discovery platform that helps you find new
+                music based on your favorite songs.
+              </Typography>
+              <CustomButton
+                backgroundColor="#0F184C"
+                buttonColor="#fff"
+                buttonText="Register"
+                heroBtn={true}
+                onClick={onSignupDialogClick}
+              />
+            </Box>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flex: "1.25",
+              }}
             >
-              Harmonify is a music discovery platform that helps you find new
-              music based on your favorite songs.
-            </Typography>
-            <CustomButton
-              backgroundColor="#0F184C"
-              buttonColor="#fff"
-              buttonText="Register"
-              heroBtn={true}
-              onClick={onSignupDialogClick}
-            />
-          </Box>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              flex: "1.25",
-            }}
-          >
-            <img
-              src={heroIcon}
-              alt="hero"
-              style={{ maxWidth: "80%", marginBottom: "2rem" }}
-            />
-          </div>
-        </CustomBox>
+              <img
+                src={heroIcon}
+                alt="hero"
+                style={{ maxWidth: "80%", marginBottom: "2rem" }}
+              />
+            </div>
+          </CustomBox>
+        )}
       </Container>
       <RegisterDialog
         open={open}

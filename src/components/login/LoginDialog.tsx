@@ -21,7 +21,8 @@ const LoginDialog = (props: LoginDialogProps) => {
 	const handleSubmit = async (values: LoginValues) => {
 		let response = await AuthAPI.login(values.email, values.password);
 		props.handleClose();
-		navigate("/logged-in-landing-page")
+		navigate("/")
+		window.location.reload();
 		// for testing reasons
 		console.log("AuthAPI response", response);
 		console.log("Status", AuthAPI.getStatus());

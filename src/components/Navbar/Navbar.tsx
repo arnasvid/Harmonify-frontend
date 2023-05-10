@@ -27,6 +27,13 @@ import { useNavigate } from "react-router-dom";
 export const Navbar = () => {
   const navigate = useNavigate();
 
+  const logOut = () => {
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
+
+  const isUserLoggedIn = localStorage.getItem("token");
+
   const [open, setOpen] = React.useState(false);
   const [openLogin, setOpenLogin] = React.useState(false);
 
@@ -208,7 +215,22 @@ export const Navbar = () => {
           </NavLink>
         </NavbarLinksBox>
       </Box>
-
+      {isUserLoggedIn ? (
+              <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "1rem",
+              }}
+            >
+              <CustomButton onClick={(logOut)}
+                backgroundColor="#0F184C"
+                buttonColor="#fff"
+                buttonText="Logout"
+              />
+            </Box>
+      ) : (<>
       <Box
         sx={{
           display: "flex",
@@ -239,7 +261,10 @@ export const Navbar = () => {
         handleClose={onLoginDialogClose}
         handleRegisterClose={onSignupDialogClose}
       />
+      </>
+      )}
     </NavbarContainer>
+
   );
 };
 
