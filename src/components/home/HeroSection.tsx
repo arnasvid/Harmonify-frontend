@@ -5,12 +5,24 @@ import Navbar from "../Navbar/Navbar";
 import CustomButton from "../common/CustomButton";
 import heroIcon from "../../assets/heroIcon.png";
 import RegisterDialog from "../login/RegisterDialog";
+import UserAPI from "../../api/UserApi";
 
 const HeroSection = () => {
   const [open, setOpen] = React.useState(false);
   const [openLogin, setOpenLogin] = React.useState(false);
 
   const isUserLoggedIn = localStorage.getItem("token");
+
+  const [username, setUsername] = React.useState<string>("");
+
+  useEffect(() => {
+    getUsername();
+  }, []);
+
+  const getUsername = async () => {
+    const username = await UserAPI.getUsername();
+    setUsername(username);
+  }
 
   const onLoginDialogClick = () => {
     setOpenLogin(true);
@@ -69,18 +81,18 @@ const HeroSection = () => {
               >
                 Welcome to Harmonify
               </Typography>
-              <Title variant="h1">Hello, music lover!</Title>
-              <Typography
+              <Title variant="h1">Hello, <span style={{ color: "#687690" }}>{username}</span>, want to check your listening habits?</Title>
+              {/* <Typography
                 variant="body2"
                 sx={{ fontSize: "18px", color: "#5A6473", my: 4 }}
               >
                 Check out your music taste after connecting your Spotify
                 account.
-              </Typography>
+              </Typography> */}
               <CustomButton
                 backgroundColor="green"
                 buttonColor="#fff"
-                buttonText="Connect Spotify"
+                buttonText="Connect to Spotify"
                 heroBtn={true}
               />
             </Box>

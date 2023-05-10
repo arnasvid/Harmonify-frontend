@@ -1,6 +1,5 @@
 import axios from "axios"
 import StatusResponse from "../models/auth/StatusResponse";
-import { ResetTv } from "@mui/icons-material";
 
 const BaseURL = "api/auth"
 
@@ -32,7 +31,7 @@ const AuthAPI = {
 			axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
 		}
 		return res;
-	}
+	},
 
 }
 
