@@ -56,7 +56,8 @@ export default function MenuListComposition() {
 
   const logOut = () => {
     localStorage.removeItem("token");
-    window.location.reload();
+    navigate("/");
+    // window.location.reload();
   };
 
   // return focus to the button when we transitioned from !open -> open
