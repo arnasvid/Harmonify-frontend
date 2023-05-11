@@ -64,8 +64,8 @@ const HeroSection = () => {
 
   return (
     <Box sx={{ minHeight: "80vh", width: "100%" }}>
+      <Navbar />
       <Container>
-        <Navbar />
         {isUserLoggedIn ? (
           <CustomBox>
             <Box sx={{ flex: "1" }}>
