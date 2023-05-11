@@ -4,6 +4,8 @@ import RouteItem from "../models/routes/RouteItem";
 import NewReleases from "../pages/NewReleases";
 import Top50 from "../pages/Top50";
 import SongsWeListen from "../pages/SongsWeListen";
+import MyDashboard from "../pages/MyDashboard";
+import Settings from "../pages/Settings";
 
 const routes: RouteItem[] = [
   {
@@ -31,6 +33,16 @@ const routes: RouteItem[] = [
     key: "SONGS_WE_LISTEN_PAGE",
     element: <SongsWeListen />,
   },
+  {
+    path: "/my-dashboard",
+    key: "MY_DASHBOARD_PAGE",
+    element: <MyDashboard />,
+  },
+  {
+    path: "/settings",
+    key: "SETTINGS_PAGE",
+    element: <Settings />,
+  }
 ];
 
 export default routes;

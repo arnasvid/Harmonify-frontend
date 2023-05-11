@@ -1,6 +1,6 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import { Typography } from "@mui/material";
+import { Divider, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import ListAltIcon from "@mui/icons-material/ListAlt";
@@ -23,6 +23,7 @@ import {
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import MenuListComposition from "./MenuListComposition";
 
 export const Navbar = () => {
   const navigate = useNavigate();
@@ -70,12 +71,12 @@ export const Navbar = () => {
 
   const list = (anchor: string) => {
     const urlDictionary = {
-      "Home": "/",
+      Home: "/",
       "New Releases": "/new-releases",
       "Top 50": "/top-50",
       "Songs We Listen": "/songs-we-listen",
     };
-    
+
     const handleListItemClick = (text: string) => {
       if (text in urlDictionary) {
         const url = urlDictionary[text as keyof typeof urlDictionary];
@@ -176,9 +177,14 @@ export const Navbar = () => {
           >
             {list("left")}
           </Drawer>
-          <NavbarLogo src={logo} alt="logo" style={{ maxWidth: "100" }} onClick={() => {
-            navigate("/");
-          }} />
+          <NavbarLogo
+            src={logo}
+            alt="logo"
+            style={{ maxWidth: "100" }}
+            onClick={() => {
+              navigate("/");
+            }}
+          />
         </Box>
         <NavbarLinksBox>
           <NavLink
@@ -216,55 +222,42 @@ export const Navbar = () => {
         </NavbarLinksBox>
       </Box>
       {isUserLoggedIn ? (
-              <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "1rem",
-              }}
-            >
-              <CustomButton onClick={(logOut)}
-                backgroundColor="#0F184C"
-                buttonColor="#fff"
-                buttonText="Logout"
-              />
-            </Box>
-      ) : (<>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "1rem",
-        }}
-      >
-        <NavLink variant="body2" onClick={onLoginDialogClick}>
-          Log in
-        </NavLink>
-        <CustomButton
-          backgroundColor="#0F184C"
-          buttonColor="#fff"
-          buttonText="Register"
-          onClick={onSignupDialogClick}
-        />
-      </Box>
-      <RegisterDialog
-        open={open}
-        handleLoginOpen={onLoginDialogClick}
-        handleClose={onSignupDialogClose}
-        handleLoginClose={onLoginDialogClose}
-      />
-      <LoginDialog
-        open={openLogin}
-        handleRegisterOpen={onSignupDialogClick}
-        handleClose={onLoginDialogClose}
-        handleRegisterClose={onSignupDialogClose}
-      />
-      </>
+        <MenuListComposition />
+      ) : (
+        <>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "1rem",
+            }}
+          >
+            <NavLink variant="body2" onClick={onLoginDialogClick}>
+              Log in
+            </NavLink>
+            <CustomButton
+              backgroundColor="#0F184C"
+              buttonColor="#fff"
+              buttonText="Register"
+              onClick={onSignupDialogClick}
+            />
+          </Box>
+          <RegisterDialog
+            open={open}
+            handleLoginOpen={onLoginDialogClick}
+            handleClose={onSignupDialogClose}
+            handleLoginClose={onLoginDialogClose}
+          />
+          <LoginDialog
+            open={openLogin}
+            handleRegisterOpen={onSignupDialogClick}
+            handleClose={onLoginDialogClose}
+            handleRegisterClose={onSignupDialogClose}
+          />
+        </>
       )}
     </NavbarContainer>
-
   );
 };
 

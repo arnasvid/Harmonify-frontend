@@ -1,0 +1,15 @@
+.MenuUserButton:hover{
+    background-color: white;
+    color: "#000336";
+    border-color: #000336;
+}
+
+.MenuUserButton{
+    background-color: #000336;
+    color: white;
+    border-color: #000336;
+}
+
+.MenuUser{
+    cursor: pointer;
+}
