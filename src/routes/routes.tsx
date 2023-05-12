@@ -6,6 +6,7 @@ import Top50 from "../pages/Top50";
 import SongsWeListen from "../pages/SongsWeListen";
 import MyDashboard from "../pages/MyDashboard";
 import Settings from "../pages/Settings";
+import PlaylistGenerator from "../pages/PlaylistGenerator";
 
 const routes: RouteItem[] = [
   {
@@ -42,6 +43,11 @@ const routes: RouteItem[] = [
     path: "/settings",
     key: "SETTINGS_PAGE",
     element: <Settings />,
+  },
+  {
+    path:"/playlist-generator",
+    key:"PLAYLIST_GENERATOR_PAGE",
+    element:<PlaylistGenerator/>
   }
 ];
 

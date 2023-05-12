@@ -116,6 +116,7 @@ export default function MenuListComposition() {
                     onKeyDown={handleListKeyDown}
                   >
                     <MenuItem onClick={() => navigate("/my-dashboard")}>My Dashboard</MenuItem>
+                    <MenuItem onClick={() => navigate("/playlist-generator")}>Playlist Generator</MenuItem>
                     <MenuItem onClick={() => navigate("/settings")}>Settings</MenuItem>
                     <MenuItem onClick={logOut}>Logout</MenuItem>
                   </MenuList>
