@@ -89,7 +89,7 @@ const HeroSection = () => {
                 Check out your music taste after connecting your Spotify
                 account.
               </Typography> */}
-              <CustomButton
+              <CustomButton onClick={() => window.location.href = "/api/spotifylogin/login"}
                 backgroundColor="green"
                 buttonColor="#fff"
                 buttonText="Connect to Spotify"
