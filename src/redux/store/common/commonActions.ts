@@ -7,7 +7,7 @@ import AuthAPI from "../../../api/AuthApi";
 const handleLogin =
   (isUserLoggedIn: boolean): ThunkAction<void, RootState, unknown, AnyAction> =>
   async (dispatch) => {
-    dispatch(commonActions.handleLogin(isUserLoggedIn));
+    dispatch(commonActions.handleLogin({isUserLoggedIn : isUserLoggedIn}));
   };
 
 const getStatus =

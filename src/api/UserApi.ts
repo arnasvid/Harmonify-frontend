@@ -15,6 +15,7 @@ const UserAPI = {
 			return Promise.resolve("User is not logged in");
 		}
 	},
+
 }
 
 export default UserAPI;

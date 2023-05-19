@@ -6,12 +6,15 @@ import CustomButton from "../common/CustomButton";
 import heroIcon from "../../assets/heroIcon.png";
 import RegisterDialog from "../login/RegisterDialog";
 import UserAPI from "../../api/UserApi";
+import SpotifyLoginAPI from "../../api/SpotifyLoginApi";
+import { useAppSelector } from "../../redux/store/hooks";
 
 const HeroSection = () => {
   const [open, setOpen] = React.useState(false);
   const [openLogin, setOpenLogin] = React.useState(false);
 
   const isUserLoggedIn = localStorage.getItem("token");
+  const isUserLoggedInWithSpotify = useAppSelector((common) => common.common.common.isUserLoggedInWithSpotify);
 
   const [username, setUsername] = React.useState<string>("");
 
@@ -22,7 +25,7 @@ const HeroSection = () => {
   const getUsername = async () => {
     const username = await UserAPI.getUsername();
     setUsername(username);
-  }
+  };
 
   const onLoginDialogClick = () => {
     setOpenLogin(true);
@@ -66,7 +69,7 @@ const HeroSection = () => {
     <Box sx={{ minHeight: "80vh", width: "100%" }}>
       <Navbar />
       <Container>
-        {isUserLoggedIn ? (
+      {isUserLoggedIn && isUserLoggedInWithSpotify && (
           <CustomBox>
             <Box sx={{ flex: "1" }}>
               <Typography
@@ -81,7 +84,30 @@ const HeroSection = () => {
               >
                 Welcome to Harmonify
               </Typography>
-              <Title variant="h1">Hello, <span style={{ color: "#687690" }}>{username}</span>, want to check your listening habits?</Title>
+              <Title variant="h1">
+                </Title>
+                </Box>
+          </CustomBox>
+      )}
+        {isUserLoggedIn && !isUserLoggedInWithSpotify && (
+          <CustomBox>
+            <Box sx={{ flex: "1" }}>
+              <Typography
+                variant="body2"
+                sx={{
+                  fontSize: "18px",
+                  color: "#687690",
+                  fontWeight: "500",
+                  mt: 10,
+                  mb: 4,
+                }}
+              >
+                Welcome to Harmonify
+              </Typography>
+              <Title variant="h1">
+                Hello, <span style={{ color: "#687690" }}>{username}</span>,
+                want to check your listening habits?
+              </Title>
               {/* <Typography
                 variant="body2"
                 sx={{ fontSize: "18px", color: "#5A6473", my: 4 }}
@@ -89,7 +115,11 @@ const HeroSection = () => {
                 Check out your music taste after connecting your Spotify
                 account.
               </Typography> */}
-              <CustomButton onClick={() => window.location.href = "/api/spotifylogin/login"}
+              <CustomButton
+                onClick={
+              () => SpotifyLoginAPI.login()
+                  // window.location.href = "/api/spotifylogin/login"
+                }
                 backgroundColor="green"
                 buttonColor="#fff"
                 buttonText="Connect to Spotify"
@@ -111,7 +141,7 @@ const HeroSection = () => {
               />
             </div>
           </CustomBox>
-        ) : (
+        ) } {!isUserLoggedIn && (
           <CustomBox>
             <Box sx={{ flex: "1" }}>
               <Typography

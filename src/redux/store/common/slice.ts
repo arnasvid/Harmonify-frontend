@@ -1,21 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit'
+import CommonState from './commonState'
 
 const initialState = {
-  isUserLoggedIn: undefined,
+  common : {
+    isUserLoggedIn: false,
+    isUserLoggedInWithSpotify: undefined,
+    isUserAdmin: undefined,
+  }
 }
 
 export const commonSlice = createSlice({
   name: 'common',
   initialState: initialState,
   reducers: {
-    setIsUserLoggedIn: (state, action) => {
-        state.isUserLoggedIn = action.payload
-    },
     handleLogin : (state, action) => {
-        state.isUserLoggedIn = action.payload
+        state.common = action.payload
     },
     getStatus : (state, action) => {
-      state.isUserLoggedIn = action.payload
+      state.common = action.payload
     },
   },
 })

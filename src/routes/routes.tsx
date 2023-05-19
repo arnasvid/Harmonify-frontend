@@ -7,6 +7,7 @@ import SongsWeListen from "../pages/SongsWeListen";
 import MyDashboard from "../pages/MyDashboard";
 import Settings from "../pages/Settings";
 import PlaylistGenerator from "../pages/PlaylistGenerator";
+import SpotifyCallback from "../pages/spotify/SpotifyCallback";
 
 const routes: RouteItem[] = [
   {
@@ -45,10 +46,15 @@ const routes: RouteItem[] = [
     element: <Settings />,
   },
   {
-    path:"/playlist-generator",
-    key:"PLAYLIST_GENERATOR_PAGE",
-    element:<PlaylistGenerator/>
-  }
+    path: "/playlist-generator",
+    key: "PLAYLIST_GENERATOR_PAGE",
+    element: <PlaylistGenerator />,
+  }, 
+  {
+    path: "/callback",
+    key: "SPOTIFY_CALLBACK",
+    element: <SpotifyCallback />,
+  },
 ];
 
 export default routes;

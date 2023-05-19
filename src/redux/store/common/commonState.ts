@@ -1,7 +1,7 @@
-interface StatusResponse {
+interface CommonState {
     isUserLoggedIn: boolean;
     isUserLoggedInWithSpotify?: boolean;
     isUserAdmin?: boolean;
 }
 
-export default StatusResponse;
+export default CommonState;
