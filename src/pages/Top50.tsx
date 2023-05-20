@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar/Navbar";
 import SpotifyInfoAPI from "../api/SpotifyInfo";
 import { Box, CircularProgress, hexToRgb } from "@mui/material";
 import { Height } from "@mui/icons-material";
+import Footer from "../components/footer/Footer";
 
 const Top50 = () => {
   const [top50, setTop50] = React.useState<any>();
@@ -71,6 +72,7 @@ const Top50 = () => {
           }}
         />
       )}
+      <Footer/>
     </div>
   );
 };
