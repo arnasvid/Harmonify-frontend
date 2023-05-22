@@ -23,7 +23,7 @@ const SpotifyLoginAPI = {
     let redirect_uri = import.meta.env.VITE_REDIRECT_URI;
 
     const state = generateRandomString(16);
-    const scope = "user-read-private user-read-email"; // Add additional scopes as required
+    const scope = "user-read-private user-read-email user-follow-modify ugc-image-upload playlist-modify-private playlist-modify-public user-library-modify playlist-read-collaborative user-read-currently-playing user-follow-read user-read-playback-position user-read-playback-state playlist-read-private user-read-recently-played user-top-read user-read-email user-library-read user-read-private app-remote-control streaming user-modify-playback-state"; // Add additional scopes as required
 
     const authURL =
       "https://accounts.spotify.com/authorize" +

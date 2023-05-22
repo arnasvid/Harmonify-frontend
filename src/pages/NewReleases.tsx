@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import Navbar from "../components/Navbar/Navbar";
 import SpotifyInfoAPI from "../api/SpotifyInfo";
-import { Box } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
+import Footer from "../components/footer/Footer";
 
 
 const NewReleases = () => {
@@ -57,7 +58,20 @@ const NewReleases = () => {
             })}
           </>
         )}
-        
+        {!newReleases && (
+        <CircularProgress
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignSelf: "center",
+            margin: 'auto',
+            marginTop: "100px",
+            height: '72px',
+            width: '72px',
+          }}
+        />
+      )}
+        <Footer/>
     </div>
   )
 };
