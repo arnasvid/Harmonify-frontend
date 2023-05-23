@@ -44,7 +44,7 @@ const SpotifyLogoSection = () => {
 
 
   return (
-    <CustomBox>
+    <CustomBox style={{ marginTop: "20px" }}>
       <CustomContainer>
         <Box
           sx={{

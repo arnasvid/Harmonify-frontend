@@ -16,7 +16,7 @@ const ProfileSettings = () => {
       <Box className="UserContainer" sx={{ display: "flex", justifyContent: "center", alignItems: "center", paddingTop: 5, paddingBottom: 30, flexDirection: 'column'}}>
         <Avatar sx={{ backgroundColor: "white", color: "#000336", height: "80px", width: "80px"}}>@</Avatar>
         <Typography variant="overline" sx={{ paddingTop: 2 }}>Username</Typography>
-
+        
       </Box>
     </Box>
   );

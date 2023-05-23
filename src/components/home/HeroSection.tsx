@@ -8,15 +8,30 @@ import RegisterDialog from "../login/RegisterDialog";
 import UserAPI from "../../api/UserApi";
 import SpotifyLoginAPI from "../../api/SpotifyLoginApi";
 import { useAppSelector } from "../../redux/store/hooks";
+import SpotifyInfoAPI from "../../api/SpotifyInfo";
+import "./HeroSection.css"
 
 const HeroSection = () => {
   const [open, setOpen] = React.useState(false);
   const [openLogin, setOpenLogin] = React.useState(false);
 
   const isUserLoggedIn = localStorage.getItem("token");
-  const isUserLoggedInWithSpotify = useAppSelector((common) => common.common.common.isUserLoggedInWithSpotify);
+  const isUserLoggedInWithSpotify = useAppSelector(
+    (common) => common.common.common.isUserLoggedInWithSpotify
+  );
 
   const [username, setUsername] = React.useState<string>("");
+
+  const [top1Song, setTop1Song] = React.useState<any>();
+  useEffect(() => {
+    getTop1Song();
+  }, []);
+
+  const getTop1Song = async () => {
+    let res = await SpotifyInfoAPI.getTop1Song();
+    console.log(res);
+    setTop1Song(res);
+  };
 
   useEffect(() => {
     getUsername();
@@ -69,7 +84,7 @@ const HeroSection = () => {
     <Box sx={{ minHeight: "80vh", width: "100%" }}>
       <Navbar />
       <Container>
-      {isUserLoggedIn && isUserLoggedInWithSpotify && (
+        {isUserLoggedIn && isUserLoggedInWithSpotify && (
           <CustomBox>
             <Box sx={{ flex: "1" }}>
               <Typography
@@ -84,11 +99,63 @@ const HeroSection = () => {
               >
                 Welcome to Harmonify
               </Typography>
-              <Title variant="h1">
-                </Title>
+              <Title variant="h1">Watch your music listening habits</Title>
+              <Typography
+                variant="body2"
+                sx={{ fontSize: "18px", color: "#5A6473", my: 4 }}
+              >
+                Want to see more information about your music listening habits?
+                Go to your dashboard and check it out!
+              </Typography>
+              <CustomButton
+                backgroundColor="#0F184C"
+                buttonColor="#fff"
+                buttonText="Dashboard"
+                heroBtn={true}
+                onClick={() => {
+                  window.location.href = "/my-dashboard";
+                }}
+              />
+            </Box>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flex: "1.25",
+              }}
+            >
+              {top1Song && (
+                <Box className="topSong"
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    flexDirection: "column",
+                    // paddingTop: "4rem",
+                    // paddingLeft: "3rem",
+                  }}
+                >
+                    <Typography variant="h5" style={{ color: "#5A6473" }}>
+                      Song you listened the most this month
+                    </Typography>
+                    <br />
+                    <img
+                      src={top1Song.items[0].album.images[0].url}
+                      alt="hero"
+                      style={{ maxWidth: "50%", marginBottom: "1rem" }}
+                    />
+                    <Typography variant="h3" style={{ color: "#5A6473"}}>
+                      {top1Song.items[0].artists[0].name}
+                    </Typography>
+                    <Typography variant="h5" style={{ color: "#5A6473" }}>
+                      {top1Song.items[0].name}
+                    </Typography>
                 </Box>
+              )}
+            </div>
           </CustomBox>
-      )}
+        )}
         {isUserLoggedIn && !isUserLoggedInWithSpotify && (
           <CustomBox>
             <Box sx={{ flex: "1" }}>
@@ -117,7 +184,7 @@ const HeroSection = () => {
               </Typography> */}
               <CustomButton
                 onClick={
-              () => SpotifyLoginAPI.login()
+                  () => SpotifyLoginAPI.login()
                   // window.location.href = "/api/spotifylogin/login"
                 }
                 backgroundColor="green"
@@ -141,7 +208,8 @@ const HeroSection = () => {
               />
             </div>
           </CustomBox>
-        ) } {!isUserLoggedIn && (
+        )}
+        {!isUserLoggedIn && (
           <CustomBox>
             <Box sx={{ flex: "1" }}>
               <Typography

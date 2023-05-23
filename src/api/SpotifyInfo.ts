@@ -10,7 +10,13 @@ const SpotifyInfoAPI = {
   getNewReleases: async (): Promise<any> => {
     let res = await axios.get(`${BaseURL}/new-releases`);
     return res;
+  },
+
+  getTop1Song: async (): Promise<any> => {
+    let res = await axios.get(`${BaseURL}/user/top-1-song`);
+    return res;
   }
 };
+
 
 export default SpotifyInfoAPI;
