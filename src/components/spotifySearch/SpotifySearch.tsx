@@ -22,7 +22,6 @@ import SpotifyInfo from "../../api/SpotifyInfo";
 import { useAppSelector } from "../../redux/store/hooks";
 import { Edit as EditIcon, Delete as DeleteIcon } from "@mui/icons-material";
 
-
 interface SpotifySearchProps {
   accessToken: string;
 }
@@ -72,11 +71,12 @@ export const SpotifySearch = () => {
     (common) => common.common.common.isUserLoggedInWithSpotify
   );
 
-  const isAdmin = useAppSelector(
-    (common) => common.common.common.isUserAdmin
-  );
+  const isAdmin = useAppSelector((common) => common.common.common.isUserAdmin);
 
   const [postSongs, setPostSongs] = React.useState<any>();
+
+  const [updatedDescription, setUpdatedDescription] = useState<string>("");
+  
 
   useEffect(() => {
     getPostSongs();
@@ -92,25 +92,52 @@ export const SpotifySearch = () => {
     }
   };
 
-  const handleUpdate = (postId : any) => {
+  const handleUpdate = async (postId: any) => {
     // Logic for handling update
+    const response = await fetch(`api/songsPosting/updatePostSong/${postId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        description: updatedDescription,
+      }),
+    });
+    if (response.ok) {
+      console.log("Song updated successfully!");
+      window.location.reload();
+    } else {
+      throw new Error("Failed to update song");
+    }
   };
-  
-  const handleDelete =  async (postId : any) => {
+
+  const handleUpdateButtonClick = (postId: any) => {
+    if (updatedDescription !== "") {
+      handleUpdate(postId);
+    } else {
+      alert("Please enter a description.");
+
+    }
+  };
+
+  const handleUpdatedDescriptionChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setUpdatedDescription(event.target.value);
+  };
+
+  const handleDelete = async (postId: any) => {
     // Logic for handling delete
     const response = await fetch(`api/songsPosting/deletePostSong/${postId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        },
-        });
-        if (response.ok) {
-          console.log("Song deleted successfully!");
-          window.location.reload();
-        }
-        else {
-          throw new Error("Failed to delete song");
-        }
+      },
+    });
+    if (response.ok) {
+      console.log("Song deleted successfully!");
+      window.location.reload();
+    } else {
+      throw new Error("Failed to delete song");
+    }
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -397,23 +424,31 @@ export const SpotifySearch = () => {
                       Posted by: {item.user.username}
                     </Typography>
                     {isAdmin ? (
-                      
-                    <div>
-                      <Button
-                        variant="outlined"
-                        startIcon={<EditIcon />}
-                        onClick={() => handleUpdate(item.id)}
-                      >
-                        Update
-                      </Button>
-                      <Button
-                        variant="outlined"
-                        startIcon={<DeleteIcon />}
-                        onClick={() => handleDelete(item.id)}
-                      >
-                        Delete
-                      </Button>
-                    </div>
+                      <div>
+                        <TextField
+                          label="Update Description"
+                          multiline
+                          fullWidth
+                          variant="outlined"
+                          rows={4}
+                          value={updatedDescription}
+                          onChange={handleUpdatedDescriptionChange}
+                        />
+                        <Button
+                          variant="outlined"
+                          startIcon={<EditIcon />}
+                          onClick={() => handleUpdateButtonClick(item.id)} // Call handleUpdateButtonClick with postId
+                        >
+                          Update
+                        </Button>
+                        <Button
+                          variant="outlined"
+                          startIcon={<DeleteIcon />}
+                          onClick={() => handleDelete(item.id)}
+                        >
+                          Delete
+                        </Button>
+                      </div>
                     ) : (
                       <div></div>
                     )}
