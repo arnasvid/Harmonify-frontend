@@ -20,6 +20,8 @@ import { Search as SearchIcon } from "@mui/icons-material";
 import SpotifySearchApi from "../../api/SpotifySearchApi";
 import SpotifyInfo from "../../api/SpotifyInfo";
 import { useAppSelector } from "../../redux/store/hooks";
+import { Edit as EditIcon, Delete as DeleteIcon } from "@mui/icons-material";
+
 
 interface SpotifySearchProps {
   accessToken: string;
@@ -70,6 +72,10 @@ export const SpotifySearch = () => {
     (common) => common.common.common.isUserLoggedInWithSpotify
   );
 
+  const isAdmin = useAppSelector(
+    (common) => common.common.common.isUserAdmin
+  );
+
   const [postSongs, setPostSongs] = React.useState<any>();
 
   useEffect(() => {
@@ -84,6 +90,27 @@ export const SpotifySearch = () => {
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const handleUpdate = (postId : any) => {
+    // Logic for handling update
+  };
+  
+  const handleDelete =  async (postId : any) => {
+    // Logic for handling delete
+    const response = await fetch(`api/songsPosting/deletePostSong/${postId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        },
+        });
+        if (response.ok) {
+          console.log("Song deleted successfully!");
+          window.location.reload();
+        }
+        else {
+          throw new Error("Failed to delete song");
+        }
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -369,6 +396,27 @@ export const SpotifySearch = () => {
                     >
                       Posted by: {item.user.username}
                     </Typography>
+                    {isAdmin ? (
+                      
+                    <div>
+                      <Button
+                        variant="outlined"
+                        startIcon={<EditIcon />}
+                        onClick={() => handleUpdate(item.id)}
+                      >
+                        Update
+                      </Button>
+                      <Button
+                        variant="outlined"
+                        startIcon={<DeleteIcon />}
+                        onClick={() => handleDelete(item.id)}
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                    ) : (
+                      <div></div>
+                    )}
                   </CardContent>
                 </Card>
               </Grid>
