@@ -15,7 +15,13 @@ const SpotifyInfoAPI = {
   getTop1Song: async (): Promise<any> => {
     let res = await axios.get(`${BaseURL}/user/top-1-song`);
     return res;
+  },
+
+  getPostSongs: async (): Promise<any> => {
+    let res = await axios.get(`api/postingSong/getPostSongs`);
+    return res;
   }
+
 };
 
 

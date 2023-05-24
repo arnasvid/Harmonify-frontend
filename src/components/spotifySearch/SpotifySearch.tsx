@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent, useEffect } from "react";
 import {
   Button,
   TextField,
@@ -11,8 +11,15 @@ import {
   DialogActions,
   DialogContentText,
   ClickAwayListener,
+  Grid,
+  Card,
+  CardContent,
+  CardMedia,
 } from "@mui/material";
 import { Search as SearchIcon } from "@mui/icons-material";
+import SpotifySearchApi from "../../api/SpotifySearchApi";
+import SpotifyInfo from "../../api/SpotifyInfo";
+import { useAppSelector } from "../../redux/store/hooks";
 
 interface SpotifySearchProps {
   accessToken: string;
@@ -59,6 +66,26 @@ export const SpotifySearch = () => {
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const [description, setDescription] = useState<string>("");
 
+  const isUserLoggedInWithSpotify = useAppSelector(
+    (common) => common.common.common.isUserLoggedInWithSpotify
+  );
+
+  const [postSongs, setPostSongs] = React.useState<any>();
+
+  useEffect(() => {
+    getPostSongs();
+  }, []);
+
+  const getPostSongs = async () => {
+    try {
+      const res = await SpotifySearchApi.getPostSongs();
+      console.log(res);
+      setPostSongs(res);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
@@ -82,11 +109,42 @@ export const SpotifySearch = () => {
     setDescription(event.target.value);
   };
 
-  const postSong = () => {
-    // Perform the post song action
-    console.log("Song posted!");
-    handleCloseDialog();
-    window.location.reload();
+  const postSong = async () => {
+    try {
+      const tokenData = localStorage.getItem("token");
+
+      if (!tokenData) {
+        throw new Error("No token found");
+      }
+
+      const songData = {
+        token: tokenData,
+        songName: selectedSong?.trackName,
+        artistName: selectedSong?.artistName,
+        albumName: selectedSong?.albumName,
+        albumImageURL: selectedSong?.albumImageURL,
+        description,
+      };
+
+      const response = await fetch("/api/songsPosting/postSong", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${tokenData}`,
+        },
+        body: JSON.stringify(songData),
+      });
+      if (response.ok) {
+        console.log("Song posted successfully!");
+        handleCloseDialog();
+        window.location.reload();
+      } else {
+        throw new Error("Failed to post song");
+      }
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   };
 
   const searchSpotify = async () => {
@@ -125,20 +183,39 @@ export const SpotifySearch = () => {
 
   return (
     <div>
-      <div
-        style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}
-      >
-        <TextField
-          style={{ width: "80%" }}
-          label="Search for music"
-          value={searchTerm}
-          onChange={handleChange}
-          variant="outlined"
-        />
-        <Button onClick={searchSpotify} variant="contained" color="primary">
-          <SearchIcon />
-        </Button>
-      </div>
+      {isUserLoggedInWithSpotify ? (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "20px",
+          }}
+        >
+          <TextField
+            style={{ width: "80%" }}
+            label="Search for music"
+            value={searchTerm}
+            onChange={handleChange}
+            variant="outlined"
+          />
+          <Button onClick={searchSpotify} variant="contained" color="primary">
+            <SearchIcon />
+          </Button>
+        </div>
+      ) : (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "20px",
+            marginBottom: "20px",
+          }}
+        >
+          <Typography variant="h5">
+            Please log in with Spotify to post songs
+          </Typography>
+        </div>
+      )}
       <ClickAwayListener onClickAway={handleCloseDropdown}>
         <div>
           <div
@@ -148,7 +225,15 @@ export const SpotifySearch = () => {
               justifyContent: "center",
             }}
           >
-            <Typography variant="h5">Songs People Recommend</Typography>
+            <Typography
+              variant="h3"
+              sx={{
+                marginTop: { xs: "10px", sm: "20px" },
+                fontSize: { xs: "24px", sm: "36px" },
+              }}
+            >
+              Songs People Recommend
+            </Typography>
           </div>
           <Menu
             anchorEl={anchorEl}
@@ -241,6 +326,55 @@ export const SpotifySearch = () => {
           </div>
         )}
       </Dialog>
+      {postSongs && postSongs.data && (
+        <Grid
+          container
+          spacing={3}
+          sx={{ marginTop: "20px", paddingLeft: "20px", paddingRight: "20px" }}
+        >
+          {postSongs.data
+            .slice()
+            .reverse()
+            .map((item: any, index: number) => (
+              <Grid item xs={12} sm={6} md={4} key={index}>
+                <Card>
+                  <CardMedia
+                    component="img"
+                    height="140"
+                    image={item.album.image}
+                    alt="album"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      {item.song.title}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {item.song.artist}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {item.album.title}
+                    </Typography>
+                    <br />
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      sx={{ fontSize: "1.2rem" }}
+                    >
+                      {item.description}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="#000336"
+                      sx={{ fontWeight: "bold" }}
+                    >
+                      Posted by: {item.user.username}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+        </Grid>
+      )}
     </div>
   );
 };
