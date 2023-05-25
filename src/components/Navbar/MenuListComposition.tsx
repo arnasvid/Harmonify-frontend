@@ -72,7 +72,7 @@ export default function MenuListComposition() {
 
   return (
     <Stack direction="row" spacing={2}>
-      <Box className="MenuUser" style={{ display: "flex" }}>
+      <Box className="MenuUser" style={{ display: "flex", position: "relative" }}>
         <Button
           className="MenuUserButton"
           ref={anchorRef}
@@ -89,7 +89,7 @@ export default function MenuListComposition() {
           sx={{ backgroundColor: "#000336" , animation: ".2s ease-in-out 0s", border: "2px solid #000336" , borderRadius: "8%", padding: "6px 12px", gap: "8px", marginLeft: "18px"}}
         >
           <span className="buttonText">{username}</span>
-          <Avatar onClick={handleToggle} style={{ backgroundColor: "white", color: "#000336" }}>@</Avatar>
+          <Avatar onClick={handleToggle} style={{ backgroundColor: "white", color: "#000336" }} src='' alt='@'>@</Avatar>
         </Button>
         <Popper
           open={open}
@@ -98,6 +98,7 @@ export default function MenuListComposition() {
           placement="bottom-start"
           transition
           disablePortal
+          style={{ zIndex: 9999 }} // Set a higher z-index value
         >
           {({ TransitionProps, placement }) => (
             <Grow
