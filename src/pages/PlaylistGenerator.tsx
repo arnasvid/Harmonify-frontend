@@ -1,11 +1,19 @@
 import React from "react";
 import Navbar from "../components/Navbar/Navbar";
+import { Navigate } from "react-router-dom";
 
 const PlaylistGenerator = () => {
+  const isUserLoggedIn = localStorage.getItem("token");
   return (
     <div>
-      <Navbar />
-      <h1>Playlist Generator</h1>
+      {isUserLoggedIn ? (
+        <div>
+          <Navbar />
+          <h1>Playlist Generator</h1>
+        </div>
+      ) : (
+        <Navigate to="/" replace={true} />
+      )}
     </div>
   );
 };
