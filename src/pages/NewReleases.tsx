@@ -64,9 +64,9 @@ const NewReleases = () => {
                   <Typography variant="subtitle2" color="text.secondary">
                     Type: {item.album_type}
                   </Typography>
-                  <Typography variant="subtitle2" color="text.secondary">
+                  {/* <Typography variant="subtitle2" color="text.secondary">
                     Release Date: {item.release_date}
-                  </Typography>
+                  </Typography> */}
                 </CardContent>
               </Card>
             </Grid>

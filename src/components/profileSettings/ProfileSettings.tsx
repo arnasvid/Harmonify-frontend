@@ -119,6 +119,14 @@ const ProfileSettings = () => {
     }
   };
 
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const handleFileSelect = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      setSelectedFile(event.target.files[0]);
+    }
+  };
+
   return (
     <Box>
       <Box
@@ -160,11 +168,7 @@ const ProfileSettings = () => {
         >
           @
         </Avatar>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleProfilePictureChange}
-        />
+        <input type="file" accept="image/*" onChange={handleFileSelect} />
         <Typography variant="overline" sx={{ paddingTop: 2 }}>
           {username}
         </Typography>
@@ -182,15 +186,15 @@ const ProfileSettings = () => {
         <Button variant="contained" onClick={handleSaveChanges}>
           Save Changes
         </Button>
-        { isAdmin ? (
+        {isAdmin ? (
           <div>
-        <Button variant="contained" onClick={handleDownloadXML}>
-          Download XML
-        </Button>
-        <Button variant="contained" onClick={handleDownloadPDF}>
-          Download PDF
-        </Button>
-        </div>
+            <Button variant="contained" onClick={handleDownloadXML}>
+              Download XML
+            </Button>
+            <Button variant="contained" onClick={handleDownloadPDF}>
+              Download PDF
+            </Button>
+          </div>
         ) : (
           <div></div>
         )}
