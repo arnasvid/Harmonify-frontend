@@ -8,6 +8,8 @@ import { ArtistObject } from "../../models/spotify/ArtistObject";
 import TrackObject from "../../models/spotify/TrackObject";
 import HalfYearReport from "./halfYearReport";
 import AllTimeReport from "./allTimeReport";
+import WeeklyReport from "./weeklyReport";
+import HalfYearGenres from "./halfYearGenres";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -165,7 +167,7 @@ export default function BasicTabs() {
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-          Item One
+          <WeeklyReport />
         </TabPanel>
         <TabPanel value={value} index={1}>
   <Box
@@ -316,6 +318,25 @@ export default function BasicTabs() {
         )}
       </Box>
     </Box>
+    <Box>
+        <Typography variant="h6" sx={{ marginBottom: "10px", display: "flex", justifyContent: "center" }}>
+          Genres
+        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            gap: "20px",
+            maxWidth: "800px",
+            margin: "0 auto",
+          }}
+        >
+          <HalfYearGenres />
+          </Box>
+      </Box>
   </Box>
 </TabPanel>
 

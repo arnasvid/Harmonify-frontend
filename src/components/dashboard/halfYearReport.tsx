@@ -6,6 +6,7 @@ import React, { useEffect } from "react";
 import SpotifyDashboardAPI from "../../api/SpotifyDashboardAPI";
 import { ArtistObject } from "../../models/spotify/ArtistObject";
 import TrackObject from "../../models/spotify/TrackObject";
+import HalfYearGenres from "./halfYearGenres";
 
 const halfYearReport = () => {
   const [halfYearArtist, setHalfYearArtist] = React.useState<any>();
@@ -188,6 +189,32 @@ const halfYearReport = () => {
               ))}
             </Box>
           )}
+        </Box>
+      </Box>
+      <Box>
+        <Typography
+          variant="h6"
+          sx={{
+            marginBottom: "10px",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          Genres
+        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            gap: "20px",
+            maxWidth: "800px",
+            margin: "0 auto",
+          }}
+        >
+          <HalfYearGenres />
         </Box>
       </Box>
     </Box>

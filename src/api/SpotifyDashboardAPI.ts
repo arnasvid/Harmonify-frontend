@@ -39,6 +39,24 @@ const SpotifyDashboardAPI = {
         return res;
     },
 
+    getMonthlyGenres: async (): Promise<any> => {
+        let res = await axios.get(`${baseUrl}/monthly-genres`);
+        console.log(res);
+        return res;
+    },
+
+    getHalfYearGenres: async (): Promise<any> => {
+        let res = await axios.get(`${baseUrl}/halfYear-genres`);
+        console.log(res);
+        return res;
+    },
+
+    getAllTimeGenres:  async (): Promise<any> => {
+        let res = await axios.get(`${baseUrl}/allTime-genres`);
+        console.log(res);
+        return res;
+    },
+
 };
 
 export default SpotifyDashboardAPI;

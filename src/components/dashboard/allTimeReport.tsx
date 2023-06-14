@@ -8,6 +8,7 @@ import { ArtistObject } from "../../models/spotify/ArtistObject";
 import TrackObject from "../../models/spotify/TrackObject";
 import { all } from "axios";
 import { CircularProgress } from "@mui/material";
+import AllTimeGenres from "./allTimeGenres";
 
 const allTimeReport = () => {
   const [allTimeArtist, setAllTimeArtist] = React.useState<any>();
@@ -203,6 +204,25 @@ const allTimeReport = () => {
         </Box>
         )}
         </Box>
+      </Box>
+      <Box>
+        <Typography variant="h6" sx={{ marginBottom: "10px", display: "flex", justifyContent: "center" }}>
+          Genres
+        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            gap: "20px",
+            maxWidth: "800px",
+            margin: "0 auto",
+          }}
+        >
+          <AllTimeGenres />
+          </Box>
       </Box>
     </Box>
   );
