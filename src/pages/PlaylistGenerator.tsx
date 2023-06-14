@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../components/Navbar/Navbar";
 import { Navigate } from "react-router-dom";
+import Footer from "../components/footer/Footer";
 
 const PlaylistGenerator = () => {
   const isUserLoggedIn = localStorage.getItem("token");
@@ -10,6 +11,7 @@ const PlaylistGenerator = () => {
         <div>
           <Navbar />
           <h1>Playlist Generator</h1>
+          <Footer />
         </div>
       ) : (
         <Navigate to="/" replace={true} />
