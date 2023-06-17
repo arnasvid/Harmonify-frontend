@@ -7,9 +7,15 @@ import DashboardTab from "../components/dashboard/DashboardTab";
 import Footer from "../components/footer/Footer";
 import RecentlyPlayedTracks from "../components/dashboard/RecentlyPlayedTracks";
 import { Divider } from '@mui/material';
+import { useAppSelector } from "../redux/store/hooks";
 
 const MyDashboard = () => {
   const isUserLoggedIn = localStorage.getItem("token");
+  
+  const isUserLoggedInWithSpotify = useAppSelector(
+    (common) => common.common.common.isUserLoggedInWithSpotify
+  );
+
 
   // useEffect(() => {
   //   getRecentlyPlayed();
@@ -22,7 +28,7 @@ const MyDashboard = () => {
 
   return (
     <div>
-      {isUserLoggedIn ? (
+      {isUserLoggedIn && isUserLoggedInWithSpotify ? (
         <div>
           <Navbar />
           <h1 style={{  display: "flex", justifyContent: "center" }}>My Dashboard</h1>

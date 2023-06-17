@@ -12,12 +12,18 @@ import UserAPI from '../../api/UserApi';
 import { useEffect } from 'react';
 import './MenuListCSS.css'
 import { useNavigate } from 'react-router-dom';
+import { useAppSelector } from '../../redux/store/hooks';
 
 export default function MenuListComposition() {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
 
   const [username, setUsername] = React.useState<string>("");
+
+  const isUserLoggedInWithSpotify = useAppSelector(
+    (common) => common.common.common.isUserLoggedInWithSpotify
+  );
+
 
   const navigate = useNavigate();
 
@@ -116,7 +122,8 @@ export default function MenuListComposition() {
                     aria-labelledby="composition-button"
                     onKeyDown={handleListKeyDown}
                   >
-                    <MenuItem onClick={() => navigate("/my-dashboard")}>My Dashboard</MenuItem>
+                    { isUserLoggedInWithSpotify ? <MenuItem onClick={() => navigate("/my-dashboard")}>My Dashboard</MenuItem> : null}
+                     {/* <MenuItem onClick={() => navigate("/my-dashboard")}>My Dashboard</MenuItem> */}
                     <MenuItem onClick={() => navigate("/playlist-generator")}>Playlist Generator</MenuItem>
                     <MenuItem onClick={() => navigate("/settings")}>Settings</MenuItem>
                     <MenuItem onClick={logOut}>Logout</MenuItem>
