@@ -13,18 +13,14 @@ const ProfileSettings = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [profilePicture, setProfilePicture] = useState("");
-
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const isAdmin = useAppSelector((common) => common.common.common.isUserAdmin);
 
   useEffect(() => {
     getUsername();
   }, []);
 
-  const downloadFile = (
-    content: string,
-    fileName: string,
-    mimeType: string
-  ) => {
+  const downloadFile = (content: string, fileName: string, mimeType: string) => {
     const link = document.createElement("a");
     link.href = URL.createObjectURL(new Blob([content], { type: mimeType }));
     link.download = fileName;
@@ -51,8 +47,10 @@ const ProfileSettings = () => {
   };
 
   const handleProfilePictureChange = (event: ChangeEvent<HTMLInputElement>) => {
-    // const file = event.target.files[0];
-    // setProfilePicture(URL.createObjectURL(file));
+    const file = event.target.files && event.target.files[0];
+    if (file) {
+      setProfilePicture(URL.createObjectURL(file));
+    }
   };
 
   const handleSaveChanges = () => {
@@ -119,8 +117,6 @@ const ProfileSettings = () => {
     }
   };
 
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-
   const handleFileSelect = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
       setSelectedFile(event.target.files[0]);
@@ -164,11 +160,23 @@ const ProfileSettings = () => {
             color: "#000336",
             height: "80px",
             width: "80px",
+            marginBottom: "20px",
           }}
         >
           @
         </Avatar>
-        <input type="file" accept="image/*" onChange={handleFileSelect} />
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleProfilePictureChange}
+          style={{ display: "none" }}
+          id="profile-picture-input"
+        />
+        <label htmlFor="profile-picture-input">
+          <Button variant="outlined" component="span">
+            Upload Profile Picture
+          </Button>
+        </label>
         <Typography variant="overline" sx={{ paddingTop: 2 }}>
           {username}
         </Typography>
@@ -176,27 +184,41 @@ const ProfileSettings = () => {
           label="Username"
           value={username}
           onChange={handleUsernameChange}
+          fullWidth
+          sx={{ marginBottom: "10px" }}
         />
         <TextField
           label="Password"
           type="password"
           value={password}
           onChange={handlePasswordChange}
+          fullWidth
+          sx={{ marginBottom: "10px" }}
         />
-        <Button variant="contained" onClick={handleSaveChanges}>
+        <Button
+          variant="contained"
+          onClick={handleSaveChanges}
+          sx={{ marginBottom: "20px" }}
+        >
           Save Changes
         </Button>
-        {isAdmin ? (
+        {isAdmin && (
           <div>
-            <Button variant="contained" onClick={handleDownloadXML}>
+            <Button
+              variant="contained"
+              onClick={handleDownloadXML}
+              sx={{ marginBottom: "10px" }}
+            >
               Download XML
             </Button>
-            <Button variant="contained" onClick={handleDownloadPDF}>
+            <Button
+              variant="contained"
+              onClick={handleDownloadPDF}
+              sx={{ marginBottom: "10px" }}
+            >
               Download PDF
             </Button>
           </div>
-        ) : (
-          <div></div>
         )}
       </Box>
     </Box>
