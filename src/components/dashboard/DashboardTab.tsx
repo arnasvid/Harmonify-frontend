@@ -10,6 +10,7 @@ import HalfYearReport from "./halfYearReport";
 import AllTimeReport from "./allTimeReport";
 import WeeklyReport from "./weeklyReport";
 import HalfYearGenres from "./halfYearGenres";
+import MonthlyGenres from "./monthlyGenres";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -170,156 +171,179 @@ export default function BasicTabs() {
           <WeeklyReport />
         </TabPanel>
         <TabPanel value={value} index={1}>
-  <Box
-    sx={{
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      padding: "20px",
-      backgroundColor: "#f9f9f9",
-    }}
-  >
-    <Box
+        <Box
       sx={{
         display: "flex",
-        flexDirection: "row",
+        flexDirection: "column",
         alignItems: "center",
-        justifyContent: "center",
-        flexWrap: "wrap",
-        gap: "20px",
-        maxWidth: "800px",
-        margin: "0 auto",
+        padding: "20px",
+        backgroundColor: "#f9f9f9",
       }}
     >
       <Box
         sx={{
           display: "flex",
-          flexDirection: "column",
+          flexDirection: "row",
           alignItems: "center",
-          flexGrow: 1,
-          minWidth: 0,
+          justifyContent: "center",
+          flexWrap: "wrap",
+          gap: "20px",
+          maxWidth: "800px",
+          margin: "0 auto",
         }}
       >
-        <Typography variant="h6" sx={{ marginBottom: "10px" }}>
-          Top 5 Artists
-        </Typography>
-        {monthlyArtist && (
-          <Box>
-            {monthlyArtist.items.map((artist: ArtistObject, index: number) => (
-              <div
-                key={index}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  marginBottom: "10px",
-                  padding: "10px",
-                  borderRadius: "8px",
-                  backgroundColor: index === 0 ? "#0F184C" : "#ffffff",
-                }}
-              >
-                <Typography
-                  variant={index === 0 ? "h5" : "body1"}
-                  sx={{
-                    marginRight: "10px",
-                    fontWeight: "bold",
-                    color: index === 0 ? "#ffffff" : "#000000",
-                  }}
-                >
-                  {index + 1}
-                </Typography>
-                <div>
-                  <Typography
-                    variant={index === 0 ? "h5" : "body1"}
-                    sx={{
-                      marginBottom: "5px",
-                      color: index === 0 ? "#ffffff" : "#000000",
-                    }}
-                  >
-                    {artist.name}
-                  </Typography>
-                  <img
-                    src={artist.images[0].url}
-                    alt={artist.name}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            padding: "20px",
+            backgroundColor: "#f9f9f9",
+            flexGrow: 1,
+            minWidth: 0,
+          }}
+        >
+          <Typography variant="h5" sx={{ marginBottom: "10px" }}>
+            Top 5 Artists
+          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              flexWrap: "wrap",
+              gap: "20px",
+            }}
+          >
+          {monthlyArtist && (
+            <Box>
+              {monthlyArtist.items.map(
+                (artist: ArtistObject, index: number) => (
+                  <Box
+                    key={index}
                     style={{
-                      width: "150px",
-                      height: "150px",
-                      objectFit: "cover",
-                      borderRadius: "50%",
-                      boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.3)",
-                    }}
-                  />
-                </div>
-              </div>
-            ))}
-          </Box>
-        )}
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          flexGrow: 1,
-          minWidth: 0,
-        }}
-      >
-        <Typography variant="h6" sx={{ marginBottom: "10px" }}>
-          Top 5 Songs
-        </Typography>
-        {monthlySong && (
-          <Box>
-            {monthlySong.items.map((song: TrackObject, index: number) => (
-              <div
-                key={index}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  marginBottom: "10px",
-                  padding: "10px",
-                  borderRadius: "8px",
-                  backgroundColor: index === 0 ? "#0F184C" : "#ffffff",
-                }}
-              >
-                <Typography
-                  variant={index === 0 ? "h5" : "body1"}
-                  sx={{
-                    marginRight: "10px",
-                    fontWeight: "bold",
-                    color: index === 0 ? "#ffffff" : "#000000",
-                  }}
-                >
-                  {index + 1}
-                </Typography>
-                <div>
-                  <Typography
-                    variant={index === 0 ? "h5" : "body1"}
-                    sx={{
-                      marginBottom: "5px",
-                      color: index === 0 ? "#ffffff" : "#000000",
-                    }}
-                  >
-                    {song.name}
-                  </Typography>
-                  <img
-                    src={song.album.images[0].url}
-                    alt={song.name}
-                    style={{
-                      width: "150px",
-                      height: "150px",
-                      objectFit: "cover",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      marginBottom: "10px",
+                      padding: "10px",
                       borderRadius: "8px",
-                      boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.3)",
+                      backgroundColor: index === 0 ? "#0F184C" : "#ffffff",
                     }}
-                  />
-                </div>
-              </div>
-            ))}
+                  >
+                    <img
+                src={artist.images[0].url}
+                alt="artist"
+                width="200"
+                height="200"
+                    />
+                    <Typography
+                      variant={index === 0 ? "h5" : "body1"}
+                      sx={{
+                        marginRight: "10px",
+                        fontWeight: "bold",
+                        color: index === 0 ? "#ffffff" : "#000000",
+                      }}
+                    >
+                      {index + 1}
+                    </Typography>
+                      <Typography
+                        variant={index === 0 ? "h5" : "body1"}
+                        sx={{
+                          marginBottom: "5px",
+                          color: index === 0 ? "#ffffff" : "#000000",
+                        }}
+                      >
+                        {artist.name}
+                      </Typography>
+                  </Box>
+                )
+              )}
+            </Box>
+          )}
           </Box>
-        )}
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            padding: "20px",
+            backgroundColor: "#f9f9f9",
+          }}
+        >
+          <Typography variant="h6" sx={{ marginBottom: "10px" }}>
+            Top 5 Songs
+          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              flexWrap: "wrap",
+              gap: "20px",
+            }}
+          >
+          {monthlySong && (
+            <Box>
+              {monthlySong.items.map((song: TrackObject, index: number) => (
+                <div
+                key={index}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  marginBottom: "10px",
+                  padding: "10px",
+                  borderRadius: "8px",
+                  backgroundColor: index === 0 ? "#0F184C" : "#ffffff",
+                }}
+                >
+                <img
+                  src={song.album.images[0].url}
+                  alt={song.name}
+                  width="200"
+                  height="200"
+                />
+                  <Typography
+                    variant={index === 0 ? "h5" : "body1"}
+                    sx={{
+                      marginRight: "10px",
+                      fontWeight: "bold",
+                      color: index === 0 ? "#ffffff" : "#000000",
+                    }}
+                  >
+                    {index + 1}
+                  </Typography>
+                  <div>
+                    <Typography
+                      variant={index === 0 ? "h5" : "body1"}
+                      sx={{
+                        marginBottom: "5px",
+                        color: index === 0 ? "#ffffff" : "#000000",
+                      }}
+                    >
+                      {song.name}
+                    </Typography>
+                  </div>
+                </div>
+              ))}
+            </Box>
+          )}
+          </Box>
+        </Box>
       </Box>
-    </Box>
-    <Box>
-        <Typography variant="h6" sx={{ marginBottom: "10px", display: "flex", justifyContent: "center" }}>
+      <Box>
+        <Typography
+          variant="h6"
+          sx={{
+            marginBottom: "10px",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
           Genres
         </Typography>
         <Box
@@ -334,10 +358,10 @@ export default function BasicTabs() {
             margin: "0 auto",
           }}
         >
-          <HalfYearGenres />
-          </Box>
+          <MonthlyGenres />
+        </Box>
       </Box>
-  </Box>
+    </Box>
 </TabPanel>
 
         <TabPanel value={value} index={2}>

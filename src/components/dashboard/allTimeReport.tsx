@@ -69,21 +69,34 @@ const allTimeReport = () => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            padding: "20px",
+            backgroundColor: "#f9f9f9",
             flexGrow: 1,
             minWidth: 0,
           }}
         >
-          <Typography variant="h6" sx={{ marginBottom: "10px" }}>
+          <Typography variant="h5" sx={{ marginBottom: "10px" }}>
             Top 5 Artists
           </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              flexWrap: "wrap",
+              gap: "20px",
+            }}
+          >
           {allTimeArtist && (
             <Box>
               {allTimeArtist.items.map(
                 (artist: ArtistObject, index: number) => (
-                  <div
+                  <Box
                     key={index}
                     style={{
                       display: "flex",
+                      flexDirection: "column",
                       alignItems: "center",
                       marginBottom: "10px",
                       padding: "10px",
@@ -91,6 +104,12 @@ const allTimeReport = () => {
                       backgroundColor: index === 0 ? "#0F184C" : "#ffffff",
                     }}
                   >
+                    <img
+                src={artist.images[0].url}
+                alt="artist"
+                width="200"
+                height="200"
+                    />
                     <Typography
                       variant={index === 0 ? "h5" : "body1"}
                       sx={{
@@ -101,7 +120,6 @@ const allTimeReport = () => {
                     >
                       {index + 1}
                     </Typography>
-                    <div>
                       <Typography
                         variant={index === 0 ? "h5" : "body1"}
                         sx={{
@@ -111,50 +129,56 @@ const allTimeReport = () => {
                       >
                         {artist.name}
                       </Typography>
-                      <img
-                        src={artist.images[0].url}
-                        alt={artist.name}
-                        style={{
-                          width: "150px",
-                          height: "150px",
-                          objectFit: "cover",
-                          borderRadius: "50%",
-                          boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.3)",
-                        }}
-                      />
-                    </div>
-                  </div>
+                  </Box>
                 )
               )}
             </Box>
           )}
+          </Box>
         </Box>
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            flexGrow: 1,
-            minWidth: 0,
+            padding: "20px",
+            backgroundColor: "#f9f9f9",
           }}
         >
           <Typography variant="h6" sx={{ marginBottom: "10px" }}>
             Top 5 Songs
           </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              flexWrap: "wrap",
+              gap: "20px",
+            }}
+          >
           {allTimeSong && (
             <Box>
               {allTimeSong.items.map((song: TrackObject, index: number) => (
                 <div
-                  key={index}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    marginBottom: "10px",
-                    padding: "10px",
-                    borderRadius: "8px",
-                    backgroundColor: index === 0 ? "#0F184C" : "#ffffff",
-                  }}
+                key={index}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  marginBottom: "10px",
+                  padding: "10px",
+                  borderRadius: "8px",
+                  backgroundColor: index === 0 ? "#0F184C" : "#ffffff",
+                }}
                 >
+                <img
+                  src={song.album.images[0].url}
+                  alt={song.name}
+                  width="200"
+                  height="200"
+                />
                   <Typography
                     variant={index === 0 ? "h5" : "body1"}
                     sx={{
@@ -175,38 +199,23 @@ const allTimeReport = () => {
                     >
                       {song.name}
                     </Typography>
-                    <img
-                      src={song.album.images[0].url}
-                      alt={song.name}
-                      style={{
-                        width: "150px",
-                        height: "150px",
-                        objectFit: "cover",
-                        borderRadius: "8px",
-                        boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.3)",
-                      }}
-                    />
                   </div>
                 </div>
               ))}
             </Box>
           )}
-         {!allTimeArtist && (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            marginTop: "100px",
-          }}
-        >
-          <CircularProgress size={72} />
-
-        </Box>
-        )}
+          </Box>
         </Box>
       </Box>
       <Box>
-        <Typography variant="h6" sx={{ marginBottom: "10px", display: "flex", justifyContent: "center" }}>
+        <Typography
+          variant="h6"
+          sx={{
+            marginBottom: "10px",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
           Genres
         </Typography>
         <Box
@@ -222,7 +231,7 @@ const allTimeReport = () => {
           }}
         >
           <AllTimeGenres />
-          </Box>
+        </Box>
       </Box>
     </Box>
   );

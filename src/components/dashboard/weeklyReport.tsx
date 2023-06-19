@@ -57,6 +57,8 @@ const WeeklyReport = () => {
           justifyContent: "center",
           flexWrap: "wrap",
           gap: "20px",
+          maxWidth: "800px",
+          margin: "0 auto",
         }}
       >
         <Box
@@ -66,6 +68,8 @@ const WeeklyReport = () => {
             alignItems: "center",
             padding: "20px",
             backgroundColor: "#f9f9f9",
+            flexGrow: 1,
+            minWidth: 0,
           }}
         >
           <Typography variant="h5" sx={{ marginBottom: "20px" }}>
@@ -88,8 +92,10 @@ const WeeklyReport = () => {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  padding: "20px",
-                  backgroundColor: "#f9f9f9",
+                  marginBottom: "10px",
+                  padding: "10px",
+                  borderRadius: "8px",
+                  backgroundColor: index === 0 ? "#0F184C" : "#ffffff",
                 }}
               >
                 <img
@@ -98,7 +104,25 @@ const WeeklyReport = () => {
                   width="200"
                   height="200"
                 />
-                <Typography variant="body1">{artist.name}</Typography>
+                <Typography
+                  variant={index === 0 ? "h5" : "body1"}
+                  sx={{
+                    marginRight: "10px",
+                    fontWeight: "bold",
+                    color: index === 0 ? "#ffffff" : "#000000",
+                  }}
+                >
+                  {index + 1}
+                </Typography>
+                <Typography
+                  variant={index === 0 ? "h5" : "body1"}
+                  sx={{
+                    marginBottom: "5px",
+                    color: index === 0 ? "#ffffff" : "#000000",
+                  }}
+                >
+                  {artist.name}
+                </Typography>
               </Box>
             ))}
           </Box>
@@ -132,8 +156,10 @@ const WeeklyReport = () => {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  padding: "20px",
-                  backgroundColor: "#f9f9f9",
+                  marginBottom: "10px",
+                  padding: "10px",
+                  borderRadius: "8px",
+                  backgroundColor: index === 0 ? "#0F184C" : "#ffffff",
                 }}
               >
                 <img
@@ -142,7 +168,25 @@ const WeeklyReport = () => {
                   width="200"
                   height="200"
                 />
-                <Typography variant="body1">{song.name}</Typography>
+                <Typography
+                  variant={index === 0 ? "h5" : "body1"}
+                  sx={{
+                    marginRight: "10px",
+                    fontWeight: "bold",
+                    color: index === 0 ? "#ffffff" : "#000000",
+                  }}
+                >
+                  {index + 1}
+                </Typography>
+                <Typography
+                  variant={index === 0 ? "h5" : "body1"}
+                  sx={{
+                    marginBottom: "5px",
+                    color: index === 0 ? "#ffffff" : "#000000",
+                  }}
+                >
+                  {song.name}
+                </Typography>
               </Box>
             ))}
           </Box>
