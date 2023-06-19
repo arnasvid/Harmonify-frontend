@@ -16,6 +16,16 @@ const UserAPI = {
 		}
 	},
 
+	getProfilePicture: (): Promise<string> => {
+		if(isUserLoggedIn) {
+			return axios.get(`${BaseURL}/getProfilePicture`).then((response : any) => {
+				return response.data;
+			})
+		} else {
+			return Promise.resolve("User is not logged in or no profile picture found");
+		}
+	}
+
 }
 
 export default UserAPI;

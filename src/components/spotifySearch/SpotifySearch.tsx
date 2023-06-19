@@ -33,39 +33,52 @@ interface SearchResults {
   albumImageURL: string;
 }
 
-export const RequestAccessToken = async () => {
-  try {
-    const response = await fetch("https://accounts.spotify.com/api/token", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: `grant_type=client_credentials&client_id=${
-        import.meta.env.VITE_CLIENT_ID
-      }&client_secret=${import.meta.env.VITE_CLIENT_SECRET}`,
-    });
+export const RequestAccessToken = () => {
+  return new Promise<string>(async (resolve, reject) => {
+    try {
+      const response = await fetch("https://accounts.spotify.com/api/token", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: `grant_type=client_credentials&client_id=${
+          import.meta.env.VITE_CLIENT_ID
+        }&client_secret=${import.meta.env.VITE_CLIENT_SECRET}`,
+      });
 
-    if (response.ok) {
-      const data = await response.json();
-      return data.access_token;
-    } else {
-      throw new Error("Failed to fetch access token");
+      if (response.ok) {
+        const data = await response.json();
+        resolve(data.access_token);
+      } else {
+        throw new Error("Failed to fetch access token");
+      }
+    } catch (error) {
+      console.error(error);
+      reject(error);
     }
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
+  });
 };
 
-const accessToken = await RequestAccessToken();
-
 export const SpotifySearch = () => {
+  const [accessToken, setAccessToken] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [searchResults, setSearchResults] = useState<SearchResults[]>([]);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedSong, setSelectedSong] = useState<SearchResults | null>(null);
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const [description, setDescription] = useState<string>("");
+
+  useEffect(() => {
+    const fetchAccessToken = async () => {
+      try {
+        const token = await RequestAccessToken();
+        setAccessToken(token);
+      } catch (error) {
+        console.error("Error fetching Access Token:", error);
+      }
+    };
+    fetchAccessToken();
+  }, []);
 
   const isUserLoggedInWithSpotify = useAppSelector(
     (common) => common.common.common.isUserLoggedInWithSpotify
@@ -202,6 +215,10 @@ export const SpotifySearch = () => {
   };
 
   const searchSpotify = async () => {
+    if (!accessToken) {
+      alert("Access token not loaded yet, please wait and try again.");
+      return;
+    }
     try {
       const response = await fetch(
         `https://api.spotify.com/v1/search?q=${searchTerm}&type=track`,

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BaseURL = "http://localhost:5173/api/songsPosting";
+const BaseURL = "/api/songsPosting";
 
 const PostingSongAPI = {
     getPostSongs: async (): Promise<any> => {

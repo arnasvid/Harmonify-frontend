@@ -41,12 +41,7 @@ const routes: RouteItem[] = [
     element: <MyDashboard />,
   },
   {
-    path: "/settings",
-    key: "SETTINGS_PAGE",
-    element: <Settings />,
-  },
-  {
-    path: "/playlist-generator",
+    path: "/music-recommendations",
     key: "PLAYLIST_GENERATOR_PAGE",
     element: <PlaylistGenerator />,
   }, 

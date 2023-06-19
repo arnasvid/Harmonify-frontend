@@ -17,7 +17,6 @@ const HalfYearGenres = () => {
       const res = await SpotifyDashboardAPI.getHalfYearGenres();
       const sortedGenres = res.sort((a: any, b: any) => b.count - a.count); // Sort genres by count in descending order
       const top5Genres = sortedGenres.slice(0, 5); // Get the top 5 genres
-      // console.log("TOP 5 GENRES:", top5Genres);
       setTopGenres(top5Genres);
       setLoading(false);
     } catch (error: any) {

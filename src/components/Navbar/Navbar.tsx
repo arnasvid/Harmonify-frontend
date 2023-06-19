@@ -24,6 +24,7 @@ import {
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MenuListComposition from "./MenuListComposition";
+import UserAPI from "../../api/UserApi";
 
 export const Navbar = () => {
   const navigate = useNavigate();

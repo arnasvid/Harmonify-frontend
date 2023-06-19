@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "http://localhost:5173/api/dashboard";
+const baseUrl = "/api/dashboard";
 
 const SpotifyDashboardAPI = {
     getMonthlyArtists: async () => {

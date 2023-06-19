@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BaseURL = "http://localhost:5173/api/scrobble";
+const BaseURL = "/api/scrobble";
 
 const ScrobbleAPI = {
     getTopWeeklyArtists: async (): Promise<any> => {

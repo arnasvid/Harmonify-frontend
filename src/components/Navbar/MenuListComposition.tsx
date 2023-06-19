@@ -50,6 +50,7 @@ export default function MenuListComposition() {
 
     setOpen(false);
   };
+  
 
   function handleListKeyDown(event: React.KeyboardEvent) {
     if (event.key === 'Tab') {
@@ -124,8 +125,8 @@ export default function MenuListComposition() {
                   >
                     { isUserLoggedInWithSpotify ? <MenuItem onClick={() => navigate("/my-dashboard")}>My Dashboard</MenuItem> : null}
                      {/* <MenuItem onClick={() => navigate("/my-dashboard")}>My Dashboard</MenuItem> */}
-                    <MenuItem onClick={() => navigate("/playlist-generator")}>Playlist Generator</MenuItem>
-                    <MenuItem onClick={() => navigate("/settings")}>Settings</MenuItem>
+                    <MenuItem onClick={() => navigate("/music-recommendations")}>Music Recommendations</MenuItem>
+                    {/* <MenuItem onClick={() => navigate("/settings")}>Settings</MenuItem> */}
                     <MenuItem onClick={logOut}>Logout</MenuItem>
                   </MenuList>
                 </ClickAwayListener>

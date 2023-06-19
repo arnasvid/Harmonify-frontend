@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "http://localhost:5173/api/scrobble";
+const baseUrl = "/api/scrobble";
 
 const SpotifyPersonalAPI = {
   getRecentlyPlayed: async () => {

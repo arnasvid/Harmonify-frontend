@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BaseURL = "http://localhost:5173/api/dataXmlPdf";
+const BaseURL = "/api/dataXmlPdf";
 
 const DataXmlPdfAPI = {
     dataPdf: async (): Promise<any> => {
