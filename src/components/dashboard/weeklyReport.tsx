@@ -73,7 +73,7 @@ const WeeklyReport = () => {
           }}
         >
           <Typography variant="h5" sx={{ marginBottom: "20px" }}>
-            Weekly Artists
+            Top 5 Weekly Artists
           </Typography>
           <Box
             sx={{
@@ -137,7 +137,7 @@ const WeeklyReport = () => {
           }}
         >
           <Typography variant="h5" sx={{ marginBottom: "20px" }}>
-            Weekly Songs
+            Top 5 Weekly Songs
           </Typography>
           <Box
             sx={{
